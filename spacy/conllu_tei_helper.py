@@ -1,7 +1,3 @@
-# Only the following type of TEI-files are supported
-# - Containing extensively <s> and <w> tags; will be processed as pretokenized on both levels
-
-from os import link
 import sys
 import xml.etree.ElementTree as ET
 from conllu import parse_incr
@@ -13,65 +9,65 @@ class TEIConversionException(Exception):
         super().__init__(self.message)
 
 
-def _tag_without_namespace(element):
-    _, _, tag = element.tag.rpartition("}")  # strip ns
+def localname(element: ET.Element) -> str:
+    """
+    Get the localname of an element, i.e. without the namespace.
+    """
+    _, _, tag = element.tag.rpartition("}")
     return tag
 
 
-def has_sentences(element):
+def has_sentences(element: ET.Element) -> bool:
     return len(get_sentences(element)) > 0
 
 
-def has_tokens(element):
+def has_tokens(element: ET.Element) -> bool:
     return len(get_tokens(element)) > 0
 
 
-def get_sentences(element):
+def get_sentences(element: ET.Element) -> list[ET.Element]:
     # Xpath doesn't seem to handle the namespaces well, so we do it brute force
     ret = []
     for descendant in element.iter():
-        if _tag_without_namespace(descendant) == "s":
+        if localname(descendant) == "s":
             ret.append(descendant)
     return ret
 
 
-def get_tokens(element):
+def get_tokens(element: ET.Element) -> list[ET.Element]:
     # it would be beautiful to use the Xpath element.findall(".//[w or pc]") here
     # but 'or' is not supported in elementTree
     # see https://docs.python.org/3/library/xml.etree.elementtree.html#xpath-support
     # therefore we just iterate the tree ourselves
     ret = []
     for descendant in element.iter():
-        if (
-            _tag_without_namespace(descendant) == "w"
-            or _tag_without_namespace(descendant) == "pc"
-        ):
+        if localname(descendant) == "w" or localname(descendant) == "pc":
             ret.append(descendant)
     return ret
 
 
-def get_token_literals(element):
+def get_token_literals(element: ET.Element) -> list[str]:
     words = get_tokens(element)
     tokens = list(map(lambda w: "".join(w.itertext()), words))
     # itertext() generates empty strings for self-closing-tags like <w pos="PUNT"/>
+    # so we filter them out
     return [t for t in tokens if t]  # '' is falsy
 
 
-def get_tree(filename):
+def get_tree(filename: str) -> ET.ElementTree:
     parser = ET.XMLParser(encoding="utf-8")
     return ET.parse(filename, parser=parser)
 
 
-def get_text_elements(tree):
-    root = tree.getroot()
+def get_text_elements(element: ET.Element) -> list[ET.Element]:
     ret = []
-    for descendant in root.iter():
-        if _tag_without_namespace(descendant) == "s":
+    for descendant in element.iter():
+        if localname(descendant) == "s":
             ret.append(descendant)
     return ret
 
 
-def tei_to_spacy_docs(filename):
+def parse_tei(filename: str) -> list[list[str]]:
     """
     Convert a TEI file to a list of pretokenized strings, to be used by spacy or the like.
     Example:
@@ -85,7 +81,7 @@ def tei_to_spacy_docs(filename):
         ["Goodbye", "world", "!"]
     ]
     """
-    tree = get_tree(filename)
+    tree = get_tree(filename).getroot()
     if not has_tokens(tree):
         raise TEIConversionException("TEI document does not contain <w> nor <pc>-tags")
     if not has_sentences(tree):
@@ -160,7 +156,7 @@ def merge_tei_with_conllu_layer(conllu_path, tei_path):
     """
     Outputs the original TEI file with the conllu layer annotations added.
     """
-    tree = get_tree(tei_path)
+    tree = get_tree(tei_path).getroot()
     texts = get_text_elements(tree)
 
     conllu_sentences = conllu_sentence_generator(conllu_path)
