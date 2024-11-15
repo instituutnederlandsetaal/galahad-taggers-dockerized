@@ -4,16 +4,11 @@
 
 # Standard
 import os
-import time
 import sys
-from concurrent import futures
-import random
 import traceback
 
 # Third-party
 from tqdm import tqdm
-import requests
-import requests.exceptions
 
 # Local
 import conllu_tei_helper as tei
@@ -38,8 +33,6 @@ def convert_single_file(tei_path, conllu_path, out_path):
         f_out = open(out_path, "wb")  # we are actually writing bytes
         f_out.write(xmlstring)
         f_out.close()
-        # We do one extra action here, that is replacing the id's with xml:id's
-        # convert_id_to_xmlid(output_path)
     except Exception as e:
         print(f"error with {tei_path}", file=sys.stderr)
         print(f"Exception: {e}", file=sys.stderr)

@@ -11,11 +11,11 @@ import requests
 import requests.exceptions
 
 # Constants
-WEBSERVICE_URL = "http://lancelot.ato.ivdnt.loc/termwerk"
-NUM_WORKERS = 8 * 4 # 4 files per tagger is doable, especially with small files.
-REQUEST_TIMEOUT = 5 # SECONDS
-RETRY_TIMEOUT = 5 # SECONDS
-SLEEP_BETWEEN_REQUESTS = 0.5 # SECONDS
+WEBSERVICE_URL = "http://localhost:8120"
+NUM_WORKERS = 1 # Number of parallel request workers 
+REQUEST_TIMEOUT = 5  # SECONDS
+RETRY_TIMEOUT = 5  # SECONDS
+SLEEP_BETWEEN_REQUESTS = 5  # SECONDS
 
 
 def convert_file(in_file_path, out_file_path):
@@ -48,7 +48,7 @@ def convert_file_inner(in_file_path, out_file_path):
     while not response.ok:
         time.sleep(1)
         response = post_file()
-    
+
     poll_status(in_file_path, out_file_path, job_uuid=response.text)
 
 
@@ -69,7 +69,7 @@ def poll_status(in_file_path, out_file_path, job_uuid):
                 requests.delete(f"{WEBSERVICE_URL}/output/{job_uuid}", timeout=REQUEST_TIMEOUT)
             else:
                 print(f"[Job {job_uuid}] Error downloading output file for: {in_file_path}")
-            
+
             # Break regardless of success or failure
             # There is nothing we can do.
             break
@@ -92,7 +92,7 @@ def convert_files_in_directory_tree(input_dir, output_dir):
 
         # Parallel processing
         with futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
-        
+
             # Walk through the directory tree
             for root, _, files in os.walk(input_dir):
 
@@ -111,11 +111,11 @@ def convert_files_in_directory_tree(input_dir, output_dir):
                     if os.path.exists(out_file_path):
                         progress_bar.update(1)
                         continue
-                    
+
                     # Convert file
                     future = executor.submit(convert_file, in_file_path, out_file_path)
                     # Update progress bar once done
-                    future.add_done_callback(lambda _ : progress_bar.update(1))
+                    future.add_done_callback(lambda _: progress_bar.update(1))
 
 
 def directory_tree_file_count(dir: str):
@@ -135,7 +135,7 @@ if __name__ == "__main__":
             "Usage: python convert-using-webservice.py <input_directory> <output_directory>"
         )
         sys.exit(1)
-    
+
     # CLI arguments
     input_dir = sys.argv[1]
     output_dir = sys.argv[2]
