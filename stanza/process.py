@@ -1,16 +1,12 @@
-from io import TextIOWrapper
-from unittest import result
-from xmlrpc.client import Boolean
-import stanza
-from tei2trankit import tei2trankit
+# standard
+import os
 import xml.etree.ElementTree as ET
-from tqdm import tqdm
 
+# third-party
+import stanza
 
-"""
-Initialize the tagger if needed and process input files by calling the specific tagger implementation 
-and ensuring the output is written to the expected file.
-"""
+# local
+from conllu_tei_helper import parse_tei
 
 # The extension of output files produced by the tagger.
 OUTPUT_EXTENSION = ".conllu"
@@ -30,47 +26,52 @@ def init() -> None:
     """
     global xml_nlp
     xml_nlp = stanza.Pipeline(
-        lang="nl", tokenize_pretokenized=True, processors="tokenize,lemma,pos,ner,depparse"
+        lang="nl",
+        tokenize_pretokenized=True,
+        processors="tokenize,lemma,pos,ner,depparse",
     )
 
     global txt_nlp
-    txt_nlp = stanza.Pipeline(lang="nl", processors="tokenize,lemma,pos,ner,depparse")
+    stanza_model = os.getenv("STANZA_MODEL")
+    if stanza_model == "alpino":
+        txt_nlp = stanza.Pipeline(
+            lang="nl",
+            processors={
+                "tokenize": "alpino",
+                "lemma": "alpino",
+                "pos": "alpino",
+                "depparse": "alpino",
+                "ner": "conll02",
+            },
+        )
+    elif stanza_model == "lassysmall":
+        txt_nlp = stanza.Pipeline(
+            lang="nl",
+            processors={
+                "tokenize": "lassysmall",
+                "lemma": "lassysmall",
+                "pos": "lassysmall",
+                "depparse": "lassysmall",
+                "ner": "wikiner",
+            },
+        )
 
 
 def process(in_file: str, out_file: str) -> None:
     """
     Process the file at path "in_file" and write the result to path "out_file".
     """
-    process_all(in_file, out_file)
-
-def process_by_line(in_file, out_file) -> None:
-
     with open(out_file, "x", encoding="utf-8") as f_out:
         with open(in_file, "r", encoding="utf-8") as f_in:
 
             is_xml = is_file_xml(in_file)
             nlp = xml_nlp if is_xml else txt_nlp
-            doc = tei2trankit(in_file) if is_xml else parse_txt(f_in)
-
-            for line in tqdm(doc):
-                if is_xml:
-                    line = " ".join(line)
-                result = nlp(line)
-                f_out.write("{:C}".format(result))
-                f_out.write("\n")
-
-def process_all(in_file, out_file) -> None:
-    
-    with open(out_file, "x", encoding="utf-8") as f_out:
-        with open(in_file, "r", encoding="utf-8") as f_in:
-
-            is_xml = is_file_xml(in_file)
-            nlp = xml_nlp if is_xml else txt_nlp
-            doc = tei2trankit(in_file) if is_xml else f_in.read()
+            doc = parse_tei(in_file) if is_xml else f_in.read()
 
             result = nlp(doc)
             f_out.write("{:C}".format(result))
             f_out.write("\n")
+
 
 def is_file_xml(in_file: str) -> bool:
     try:
@@ -78,7 +79,3 @@ def is_file_xml(in_file: str) -> bool:
         return True
     except:
         return False
-
-
-def parse_txt(f_in: TextIOWrapper) -> list[str]:
-    return [line.strip() for line in f_in if not line.isspace() and line]
