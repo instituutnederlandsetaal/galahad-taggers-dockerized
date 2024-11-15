@@ -8,7 +8,7 @@ services:
             - NUM_WORKERS=6
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
-            - 8120:8080
+            - 8120:8080 # cpu & gpu share port: choose one
         deploy:
             resources:
                 limits:
@@ -23,28 +23,52 @@ services:
         image: instituutnederlandsetaal/taggers-dockerized-spacy:${VERSION}
         restart: unless-stopped
         environment:
-            - NUM_WORKERS=1
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
-            - 8120:8080
+            - 8120:8080 # cpu & gpu share port: choose one
 
-    stanza:
+    stanza-alpino-conll02:
         image: instituutnederlandsetaal/taggers-dockerized-stanza:${VERSION}
         restart: unless-stopped
         environment:
-            - NUM_WORKERS=1
+            - STANZA_MODEL=alpino
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
             - 8121:8080
 
-    flair:
-        image: instituutnederlandsetaal/taggers-dockerized-flair:${VERSION}
+    stanza-lassysmall-wikiner:
+        image: instituutnederlandsetaal/taggers-dockerized-stanza:${VERSION}
         restart: unless-stopped
         environment:
-            - NUM_WORKERS=1
+            - STANZA_MODEL=lassysmall
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
             - 8122:8080
+
+    flair-cpu:
+        image: instituutnederlandsetaal/taggers-dockerized-flair:${VERSION}
+        restart: unless-stopped
+        environment:
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        ports:
+            - 8123:8080
+
+    flair-gpu:
+        image: instituutnederlandsetaal/taggers-dockerized-flair:${VERSION}
+        restart: unless-stopped
+        environment:
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        ports:
+            - 8123:8080
+        deploy:
+            resources:
+                limits:
+                    memory: 4G
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities: [ gpu ]
 
 networks:
     default:

@@ -14,6 +14,11 @@ docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-clvn:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:$VERSION
 
+# UD-parsers
+docker push instituutnederlandsetaal/taggers-dockerized-spacy:$VERSION
+docker push instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION
+docker push instituutnederlandsetaal/taggers-dockerized-flair:$VERSION
+
 # Huggingface
 # Commented for now, as we need Git LFS to build these. Perhaps in the future.
 # docker push instituutnederlandsetaal/taggers-dockerized-hug-tdn-1400-1600:$VERSION
