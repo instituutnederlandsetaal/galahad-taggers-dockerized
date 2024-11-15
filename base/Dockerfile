@@ -1,10 +1,11 @@
-FROM python:3.10-slim-bookworm
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
+FROM python:3.12.7-slim-bookworm
 
+# Install requirements
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt \
 	&& mkdir input status output process
+
+# copy python source
 COPY --link . ./
 
 # Optionally set a callback server
