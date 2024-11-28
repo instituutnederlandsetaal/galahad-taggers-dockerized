@@ -222,6 +222,14 @@ services:
                           count: all
                           capabilities: [ gpu ]
 
+    udpipe:
+        image: instituutnederlandsetaal/taggers-dockerized-udpipe:${VERSION}
+        restart: unless-stopped
+        environment:
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        ports:
+            - 8124:8080
+
 networks:
     default:
         name: taggers-network

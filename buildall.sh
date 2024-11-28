@@ -17,6 +17,7 @@ docker build --build-arg VERSION=$VERSION -t instituutnederlandsetaal/taggers-do
 docker build --build-arg VERSION=$VERSION -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:$VERSION pie/TDN-DBNLDQ
 
 # UD-parsers
+docker build --build-arg VERSION=$VERSION -t instituutnederlandsetaal/taggers-dockerized-udpipe:$VERSION udpipe
 docker build --build-arg VERSION=$VERSION --build-arg SPACY_MODEL=nl_core_news_lg -t instituutnederlandsetaal/taggers-dockerized-spacy:$VERSION spacy
 docker build --build-arg VERSION=$VERSION -t instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION stanza
 docker build --build-arg VERSION=$VERSION -t instituutnederlandsetaal/taggers-dockerized-flair:$VERSION flair

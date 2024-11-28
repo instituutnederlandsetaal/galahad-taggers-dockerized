@@ -1,0 +1,4002 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+<h2 id="universal_dependencies_212_models">Universal Dependencies 2.12 Models</h2>
+<p>Universal Dependencies 2.12 Models are distributed under the
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> licence.
+The models are based solely on <a href="http://hdl.handle.net/11234/1-5150">Universal Dependencies
+2.12</a> treebanks, and additionally
+use <a href="https://github.com/google-research/bert/blob/master/multilingual.md">multilingual BERT</a>
+and <a href="https://huggingface.co/ufal/robeczech-base">RobeCzech</a>.</p>
+<p>The models require <a href="https://ufal.mff.cuni.cz/udpipe/2">UDPipe 2</a>.</p>
+<h3>Download</h3>
+<p>The latest version 230717 of the Universal Dependencies 2.12 models
+can be downloaded from <a href="https://hdl.handle.net/11234/1-5200">LINDAT/CLARIN repository</a>.</p>
+<p>The models are also available in the <a href="https://lindat.mff.cuni.cz/services/udpipe/">REST service</a>.</p>
+<h3 id="universal_dependencies_212_models_acknowledgements">Acknowledgements</h3>
+<p>This work has been supported by the Ministry of Education, Youth and Sports of
+the Czech Republic, Project No. LM2018101 LINDAT/CLARIAH-CZ.</p>
+<p>The models were trained on <a href="https://hdl.handle.net/11234/1-5150">Universal Dependencies 2.12</a> treebanks.</p>
+<p>For the UD treebanks which do not contain original plain text version,
+raw text is used to train the tokenizer instead. The plain texts
+were taken from the <a href="https://hdl.handle.net/11858/00-097C-0000-0022-6133-9">W2C -- Web to Corpus</a>.</p>
+<p>Finally, <a href="https://github.com/google-research/bert/blob/master/multilingual.md">multilingual BERT</a>
+and <a href="https://huggingface.co/ufal/robeczech-base">RobeCzech</a> are used to provide
+contextualized word embeddings.</p>
+<h3>Publications</h3>
+<ul>
+<li>Milan Straka, Jakub Náplava, Jana Straková, David Samuel (2020): <a href="https://doi.org/10.1007/978-3-030-83527-9_17">RobeCzech: Czech RoBERTa, a monolingual contextualized language representation model</a>. In: Text, Speech, and Dialogue. TSD 2021. Lecture Notes in Computer Science, vol 12848. Springer, Cham.</li>
+<li>Milan Straka, Jana Straková, Jan Hajič (2019): <a href="https://arxiv.org/abs/1908.07448">Evaluating Contextualized Embeddings on 54 Languages in POS Tagging, Lemmatization and Dependency Parsing</a>. In: <a href="http://ArXiv.org">ArXiv.org</a> Computing Research Repository, ISSN 2331-8422, 1904.02099</li>
+<li>Milan Straka (2018): <a href="https://www.aclweb.org/anthology/K18-2020/">UDPipe 2.0 Prototype at CoNLL 2018 UD Shared Task</a>. In: Proceedings of CoNLL 2018: The SIGNLL Conference on Computational Natural Language Learning, pp. 197-207, Association for Computational Linguistics, Stroudsburg, PA, USA, ISBN 978-1-948087-72-8</li>
+</ul>
+<h3>Model Description</h3>
+<p>The Universal Dependencies 2.12 models contain 131 models of 72 languages, each
+consisting of a tokenizer, tagger, lemmatizer and dependency parser, all trained
+using the UD data. We used the original train-dev-test split, but for treebanks
+with only train and no dev data we used last 10% of the train data as dev data.
+We produce models only for treebanks with at least 1000 training words.</p>
+<p>The tokenizer is trained using the <code>SpaceAfter=No</code> features. If the features
+are not present in the data, they can be filled in using raw text in the
+language in question.</p>
+<p>The tagger, lemmatizer and parser are trained using gold UD data.</p>
+<h3>Model Performance</h3>
+<p>We present the tokenizer, tagger, lemmatizer and parser performance, measured on
+the testing portion of the data, evaluated both on the raw text and using the
+gold tokenization. The results are F1 scores measured by the <code>conll18_ud_eval.py</code>
+script.</p>
+<table class="table table-condensed table-bordered table-striped">
+<thead>
+<tr>
+<th style="text-align:left">Model</th>
+<th style="text-align:left">Mode</th>
+<th style="text-align:right">Words</th>
+<th style="text-align:right">Sents</th>
+<th style="text-align:right">UPOS</th>
+<th style="text-align:right">XPOS</th>
+<th style="text-align:right">UFeats</th>
+<th style="text-align:right">AllTags</th>
+<th style="text-align:right">Lemma</th>
+<th style="text-align:right">UAS</th>
+<th style="text-align:right">LAS</th>
+<th style="text-align:right">MLAS</th>
+<th style="text-align:right">BLEX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">afrikaans-afribooms-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.94</td>
+<td style="text-align:right">99.65</td>
+<td style="text-align:right">98.65</td>
+<td style="text-align:right">95.80</td>
+<td style="text-align:right">98.35</td>
+<td style="text-align:right">95.62</td>
+<td style="text-align:right">98.29</td>
+<td style="text-align:right">90.41</td>
+<td style="text-align:right">87.46</td>
+<td style="text-align:right">78.92</td>
+<td style="text-align:right">79.72</td>
+</tr>
+<tr>
+<td style="text-align:left">afrikaans-afribooms-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.71</td>
+<td style="text-align:right">95.85</td>
+<td style="text-align:right">98.41</td>
+<td style="text-align:right">95.67</td>
+<td style="text-align:right">98.33</td>
+<td style="text-align:right">90.58</td>
+<td style="text-align:right">87.63</td>
+<td style="text-align:right">79.08</td>
+<td style="text-align:right">79.85</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_greek-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.98</td>
+<td style="text-align:right">49.19</td>
+<td style="text-align:right">97.63</td>
+<td style="text-align:right">97.93</td>
+<td style="text-align:right">92.13</td>
+<td style="text-align:right">90.72</td>
+<td style="text-align:right">94.76</td>
+<td style="text-align:right">81.74</td>
+<td style="text-align:right">77.92</td>
+<td style="text-align:right">61.96</td>
+<td style="text-align:right">66.22</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_greek-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.87</td>
+<td style="text-align:right">98.14</td>
+<td style="text-align:right">92.58</td>
+<td style="text-align:right">91.30</td>
+<td style="text-align:right">94.82</td>
+<td style="text-align:right">86.59</td>
+<td style="text-align:right">82.72</td>
+<td style="text-align:right">68.31</td>
+<td style="text-align:right">72.13</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_greek-perseus-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.97</td>
+<td style="text-align:right">98.85</td>
+<td style="text-align:right">92.98</td>
+<td style="text-align:right">85.76</td>
+<td style="text-align:right">91.42</td>
+<td style="text-align:right">84.89</td>
+<td style="text-align:right">86.72</td>
+<td style="text-align:right">80.13</td>
+<td style="text-align:right">74.55</td>
+<td style="text-align:right">54.46</td>
+<td style="text-align:right">55.76</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_greek-perseus-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.02</td>
+<td style="text-align:right">85.78</td>
+<td style="text-align:right">91.44</td>
+<td style="text-align:right">84.91</td>
+<td style="text-align:right">86.74</td>
+<td style="text-align:right">80.30</td>
+<td style="text-align:right">74.71</td>
+<td style="text-align:right">54.56</td>
+<td style="text-align:right">55.87</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_hebrew-ptnk-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">71.14</td>
+<td style="text-align:right">98.06</td>
+<td style="text-align:right">69.03</td>
+<td style="text-align:right">69.17</td>
+<td style="text-align:right">67.09</td>
+<td style="text-align:right">66.13</td>
+<td style="text-align:right">67.47</td>
+<td style="text-align:right">48.21</td>
+<td style="text-align:right">46.75</td>
+<td style="text-align:right">31.14</td>
+<td style="text-align:right">32.42</td>
+</tr>
+<tr>
+<td style="text-align:left">ancient_hebrew-ptnk-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.70</td>
+<td style="text-align:right">96.86</td>
+<td style="text-align:right">90.36</td>
+<td style="text-align:right">89.22</td>
+<td style="text-align:right">96.60</td>
+<td style="text-align:right">91.29</td>
+<td style="text-align:right">87.61</td>
+<td style="text-align:right">68.26</td>
+<td style="text-align:right">76.48</td>
+</tr>
+<tr>
+<td style="text-align:left">arabic-padt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">94.58</td>
+<td style="text-align:right">82.09</td>
+<td style="text-align:right">91.67</td>
+<td style="text-align:right">89.00</td>
+<td style="text-align:right">89.12</td>
+<td style="text-align:right">88.65</td>
+<td style="text-align:right">90.34</td>
+<td style="text-align:right">78.87</td>
+<td style="text-align:right">74.83</td>
+<td style="text-align:right">66.04</td>
+<td style="text-align:right">68.16</td>
+</tr>
+<tr>
+<td style="text-align:left">arabic-padt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.96</td>
+<td style="text-align:right">94.34</td>
+<td style="text-align:right">94.50</td>
+<td style="text-align:right">94.01</td>
+<td style="text-align:right">95.20</td>
+<td style="text-align:right">88.24</td>
+<td style="text-align:right">83.65</td>
+<td style="text-align:right">74.73</td>
+<td style="text-align:right">76.32</td>
+</tr>
+<tr>
+<td style="text-align:left">armenian-armtdp-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.28</td>
+<td style="text-align:right">95.70</td>
+<td style="text-align:right">96.29</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.22</td>
+<td style="text-align:right">90.21</td>
+<td style="text-align:right">94.93</td>
+<td style="text-align:right">86.55</td>
+<td style="text-align:right">81.73</td>
+<td style="text-align:right">68.65</td>
+<td style="text-align:right">73.67</td>
+</tr>
+<tr>
+<td style="text-align:left">armenian-armtdp-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.86</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.86</td>
+<td style="text-align:right">90.71</td>
+<td style="text-align:right">95.54</td>
+<td style="text-align:right">88.21</td>
+<td style="text-align:right">83.30</td>
+<td style="text-align:right">69.30</td>
+<td style="text-align:right">74.60</td>
+</tr>
+<tr>
+<td style="text-align:left">armenian-bsut-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.79</td>
+<td style="text-align:right">98.73</td>
+<td style="text-align:right">97.38</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.96</td>
+<td style="text-align:right">91.20</td>
+<td style="text-align:right">96.79</td>
+<td style="text-align:right">90.06</td>
+<td style="text-align:right">85.83</td>
+<td style="text-align:right">71.10</td>
+<td style="text-align:right">79.05</td>
+</tr>
+<tr>
+<td style="text-align:left">armenian-bsut-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.60</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.16</td>
+<td style="text-align:right">91.41</td>
+<td style="text-align:right">96.99</td>
+<td style="text-align:right">90.62</td>
+<td style="text-align:right">86.38</td>
+<td style="text-align:right">71.65</td>
+<td style="text-align:right">79.57</td>
+</tr>
+<tr>
+<td style="text-align:left">basque-bdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.94</td>
+<td style="text-align:right">99.83</td>
+<td style="text-align:right">96.33</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.32</td>
+<td style="text-align:right">91.44</td>
+<td style="text-align:right">96.38</td>
+<td style="text-align:right">87.81</td>
+<td style="text-align:right">84.80</td>
+<td style="text-align:right">74.93</td>
+<td style="text-align:right">79.49</td>
+</tr>
+<tr>
+<td style="text-align:left">basque-bdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.37</td>
+<td style="text-align:right">91.48</td>
+<td style="text-align:right">96.41</td>
+<td style="text-align:right">87.88</td>
+<td style="text-align:right">84.86</td>
+<td style="text-align:right">74.97</td>
+<td style="text-align:right">79.52</td>
+</tr>
+<tr>
+<td style="text-align:left">belarusian-hse-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.37</td>
+<td style="text-align:right">86.58</td>
+<td style="text-align:right">98.21</td>
+<td style="text-align:right">97.59</td>
+<td style="text-align:right">94.52</td>
+<td style="text-align:right">93.57</td>
+<td style="text-align:right">93.25</td>
+<td style="text-align:right">87.32</td>
+<td style="text-align:right">85.41</td>
+<td style="text-align:right">76.98</td>
+<td style="text-align:right">76.66</td>
+</tr>
+<tr>
+<td style="text-align:left">belarusian-hse-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.81</td>
+<td style="text-align:right">98.16</td>
+<td style="text-align:right">95.10</td>
+<td style="text-align:right">94.13</td>
+<td style="text-align:right">93.82</td>
+<td style="text-align:right">89.79</td>
+<td style="text-align:right">87.60</td>
+<td style="text-align:right">78.81</td>
+<td style="text-align:right">78.42</td>
+</tr>
+<tr>
+<td style="text-align:left">bulgarian-btb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.91</td>
+<td style="text-align:right">94.17</td>
+<td style="text-align:right">99.20</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">97.96</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">98.01</td>
+<td style="text-align:right">94.41</td>
+<td style="text-align:right">91.71</td>
+<td style="text-align:right">85.92</td>
+<td style="text-align:right">86.61</td>
+</tr>
+<tr>
+<td style="text-align:left">bulgarian-btb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.33</td>
+<td style="text-align:right">97.37</td>
+<td style="text-align:right">98.09</td>
+<td style="text-align:right">96.99</td>
+<td style="text-align:right">98.09</td>
+<td style="text-align:right">95.22</td>
+<td style="text-align:right">92.48</td>
+<td style="text-align:right">86.61</td>
+<td style="text-align:right">87.35</td>
+</tr>
+<tr>
+<td style="text-align:left">catalan-ancora-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.95</td>
+<td style="text-align:right">99.08</td>
+<td style="text-align:right">99.11</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">98.72</td>
+<td style="text-align:right">96.98</td>
+<td style="text-align:right">99.40</td>
+<td style="text-align:right">94.92</td>
+<td style="text-align:right">93.43</td>
+<td style="text-align:right">88.06</td>
+<td style="text-align:right">89.51</td>
+</tr>
+<tr>
+<td style="text-align:left">catalan-ancora-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.17</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">98.79</td>
+<td style="text-align:right">97.09</td>
+<td style="text-align:right">99.46</td>
+<td style="text-align:right">95.08</td>
+<td style="text-align:right">93.59</td>
+<td style="text-align:right">88.27</td>
+<td style="text-align:right">89.70</td>
+</tr>
+<tr>
+<td style="text-align:left">chinese-gsdsimp-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">90.29</td>
+<td style="text-align:right">99.10</td>
+<td style="text-align:right">87.23</td>
+<td style="text-align:right">87.15</td>
+<td style="text-align:right">89.70</td>
+<td style="text-align:right">86.47</td>
+<td style="text-align:right">90.23</td>
+<td style="text-align:right">72.74</td>
+<td style="text-align:right">70.28</td>
+<td style="text-align:right">63.38</td>
+<td style="text-align:right">66.93</td>
+</tr>
+<tr>
+<td style="text-align:left">chinese-gsdsimp-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.10</td>
+<td style="text-align:right">96.00</td>
+<td style="text-align:right">99.43</td>
+<td style="text-align:right">95.33</td>
+<td style="text-align:right">99.93</td>
+<td style="text-align:right">87.08</td>
+<td style="text-align:right">83.97</td>
+<td style="text-align:right">78.23</td>
+<td style="text-align:right">82.55</td>
+</tr>
+<tr>
+<td style="text-align:left">chinese-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">90.27</td>
+<td style="text-align:right">99.10</td>
+<td style="text-align:right">87.18</td>
+<td style="text-align:right">87.09</td>
+<td style="text-align:right">89.68</td>
+<td style="text-align:right">86.42</td>
+<td style="text-align:right">90.20</td>
+<td style="text-align:right">72.57</td>
+<td style="text-align:right">70.14</td>
+<td style="text-align:right">63.02</td>
+<td style="text-align:right">66.73</td>
+</tr>
+<tr>
+<td style="text-align:left">chinese-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">96.05</td>
+<td style="text-align:right">99.41</td>
+<td style="text-align:right">95.38</td>
+<td style="text-align:right">99.92</td>
+<td style="text-align:right">87.18</td>
+<td style="text-align:right">84.07</td>
+<td style="text-align:right">78.07</td>
+<td style="text-align:right">82.55</td>
+</tr>
+<tr>
+<td style="text-align:left">classical_chinese-kyoto-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.94</td>
+<td style="text-align:right">46.37</td>
+<td style="text-align:right">89.68</td>
+<td style="text-align:right">88.94</td>
+<td style="text-align:right">91.59</td>
+<td style="text-align:right">86.06</td>
+<td style="text-align:right">97.51</td>
+<td style="text-align:right">71.39</td>
+<td style="text-align:right">66.13</td>
+<td style="text-align:right">62.36</td>
+<td style="text-align:right">64.70</td>
+</tr>
+<tr>
+<td style="text-align:left">classical_chinese-kyoto-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.43</td>
+<td style="text-align:right">92.14</td>
+<td style="text-align:right">94.63</td>
+<td style="text-align:right">89.89</td>
+<td style="text-align:right">99.52</td>
+<td style="text-align:right">84.71</td>
+<td style="text-align:right">79.40</td>
+<td style="text-align:right">75.55</td>
+<td style="text-align:right">78.24</td>
+</tr>
+<tr>
+<td style="text-align:left">coptic-scriptorium-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">75.26</td>
+<td style="text-align:right">33.63</td>
+<td style="text-align:right">73.02</td>
+<td style="text-align:right">72.92</td>
+<td style="text-align:right">73.15</td>
+<td style="text-align:right">72.08</td>
+<td style="text-align:right">73.90</td>
+<td style="text-align:right">51.82</td>
+<td style="text-align:right">50.05</td>
+<td style="text-align:right">37.34</td>
+<td style="text-align:right">39.84</td>
+</tr>
+<tr>
+<td style="text-align:left">coptic-scriptorium-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.05</td>
+<td style="text-align:right">96.91</td>
+<td style="text-align:right">97.81</td>
+<td style="text-align:right">95.90</td>
+<td style="text-align:right">97.41</td>
+<td style="text-align:right">90.46</td>
+<td style="text-align:right">87.70</td>
+<td style="text-align:right">76.41</td>
+<td style="text-align:right">79.79</td>
+</tr>
+<tr>
+<td style="text-align:left">croatian-set-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.93</td>
+<td style="text-align:right">94.79</td>
+<td style="text-align:right">98.49</td>
+<td style="text-align:right">95.82</td>
+<td style="text-align:right">96.31</td>
+<td style="text-align:right">95.53</td>
+<td style="text-align:right">97.78</td>
+<td style="text-align:right">92.41</td>
+<td style="text-align:right">89.57</td>
+<td style="text-align:right">81.89</td>
+<td style="text-align:right">84.77</td>
+</tr>
+<tr>
+<td style="text-align:left">croatian-set-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">95.90</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">95.62</td>
+<td style="text-align:right">97.83</td>
+<td style="text-align:right">92.91</td>
+<td style="text-align:right">90.07</td>
+<td style="text-align:right">82.34</td>
+<td style="text-align:right">85.21</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-pdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.93</td>
+<td style="text-align:right">93.37</td>
+<td style="text-align:right">99.30</td>
+<td style="text-align:right">98.46</td>
+<td style="text-align:right">98.78</td>
+<td style="text-align:right">98.25</td>
+<td style="text-align:right">99.38</td>
+<td style="text-align:right">95.01</td>
+<td style="text-align:right">93.64</td>
+<td style="text-align:right">90.75</td>
+<td style="text-align:right">92.30</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-pdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.38</td>
+<td style="text-align:right">98.55</td>
+<td style="text-align:right">98.87</td>
+<td style="text-align:right">98.34</td>
+<td style="text-align:right">99.46</td>
+<td style="text-align:right">95.81</td>
+<td style="text-align:right">94.43</td>
+<td style="text-align:right">91.41</td>
+<td style="text-align:right">92.97</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-cac-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">99.68</td>
+<td style="text-align:right">99.69</td>
+<td style="text-align:right">98.25</td>
+<td style="text-align:right">98.07</td>
+<td style="text-align:right">97.74</td>
+<td style="text-align:right">99.30</td>
+<td style="text-align:right">96.20</td>
+<td style="text-align:right">94.95</td>
+<td style="text-align:right">90.84</td>
+<td style="text-align:right">93.11</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-cac-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.70</td>
+<td style="text-align:right">98.26</td>
+<td style="text-align:right">98.08</td>
+<td style="text-align:right">97.74</td>
+<td style="text-align:right">99.31</td>
+<td style="text-align:right">96.20</td>
+<td style="text-align:right">94.95</td>
+<td style="text-align:right">90.86</td>
+<td style="text-align:right">93.13</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-cltt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.32</td>
+<td style="text-align:right">96.92</td>
+<td style="text-align:right">98.95</td>
+<td style="text-align:right">93.72</td>
+<td style="text-align:right">93.99</td>
+<td style="text-align:right">93.65</td>
+<td style="text-align:right">98.48</td>
+<td style="text-align:right">92.47</td>
+<td style="text-align:right">90.77</td>
+<td style="text-align:right">82.87</td>
+<td style="text-align:right">88.60</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-cltt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.40</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">94.49</td>
+<td style="text-align:right">94.07</td>
+<td style="text-align:right">99.03</td>
+<td style="text-align:right">93.17</td>
+<td style="text-align:right">91.20</td>
+<td style="text-align:right">82.92</td>
+<td style="text-align:right">88.86</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-fictree-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">98.95</td>
+<td style="text-align:right">99.14</td>
+<td style="text-align:right">97.07</td>
+<td style="text-align:right">97.93</td>
+<td style="text-align:right">96.88</td>
+<td style="text-align:right">99.29</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">94.67</td>
+<td style="text-align:right">89.47</td>
+<td style="text-align:right">92.40</td>
+</tr>
+<tr>
+<td style="text-align:left">czech-fictree-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.16</td>
+<td style="text-align:right">97.08</td>
+<td style="text-align:right">97.95</td>
+<td style="text-align:right">96.89</td>
+<td style="text-align:right">99.30</td>
+<td style="text-align:right">96.24</td>
+<td style="text-align:right">94.73</td>
+<td style="text-align:right">89.57</td>
+<td style="text-align:right">92.50</td>
+</tr>
+<tr>
+<td style="text-align:left">danish-ddt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.82</td>
+<td style="text-align:right">89.80</td>
+<td style="text-align:right">97.98</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">96.60</td>
+<td style="text-align:right">97.38</td>
+<td style="text-align:right">88.60</td>
+<td style="text-align:right">86.46</td>
+<td style="text-align:right">79.10</td>
+<td style="text-align:right">81.13</td>
+</tr>
+<tr>
+<td style="text-align:left">danish-ddt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.17</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.59</td>
+<td style="text-align:right">96.83</td>
+<td style="text-align:right">97.52</td>
+<td style="text-align:right">89.82</td>
+<td style="text-align:right">87.64</td>
+<td style="text-align:right">80.18</td>
+<td style="text-align:right">82.15</td>
+</tr>
+<tr>
+<td style="text-align:left">dutch-alpino-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.75</td>
+<td style="text-align:right">89.10</td>
+<td style="text-align:right">97.77</td>
+<td style="text-align:right">96.66</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">96.28</td>
+<td style="text-align:right">94.91</td>
+<td style="text-align:right">92.90</td>
+<td style="text-align:right">90.52</td>
+<td style="text-align:right">83.71</td>
+<td style="text-align:right">80.13</td>
+</tr>
+<tr>
+<td style="text-align:left">dutch-alpino-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.02</td>
+<td style="text-align:right">96.82</td>
+<td style="text-align:right">97.89</td>
+<td style="text-align:right">96.45</td>
+<td style="text-align:right">95.16</td>
+<td style="text-align:right">94.31</td>
+<td style="text-align:right">91.90</td>
+<td style="text-align:right">85.01</td>
+<td style="text-align:right">81.32</td>
+</tr>
+<tr>
+<td style="text-align:left">dutch-lassysmall-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.77</td>
+<td style="text-align:right">74.71</td>
+<td style="text-align:right">97.33</td>
+<td style="text-align:right">96.15</td>
+<td style="text-align:right">96.86</td>
+<td style="text-align:right">95.50</td>
+<td style="text-align:right">96.18</td>
+<td style="text-align:right">90.99</td>
+<td style="text-align:right">88.49</td>
+<td style="text-align:right">80.77</td>
+<td style="text-align:right">79.51</td>
+</tr>
+<tr>
+<td style="text-align:left">dutch-lassysmall-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.67</td>
+<td style="text-align:right">96.84</td>
+<td style="text-align:right">97.49</td>
+<td style="text-align:right">96.29</td>
+<td style="text-align:right">96.51</td>
+<td style="text-align:right">94.63</td>
+<td style="text-align:right">91.91</td>
+<td style="text-align:right">85.25</td>
+<td style="text-align:right">84.07</td>
+</tr>
+<tr>
+<td style="text-align:left">english-ewt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.09</td>
+<td style="text-align:right">87.82</td>
+<td style="text-align:right">96.69</td>
+<td style="text-align:right">96.32</td>
+<td style="text-align:right">96.70</td>
+<td style="text-align:right">95.01</td>
+<td style="text-align:right">97.26</td>
+<td style="text-align:right">90.71</td>
+<td style="text-align:right">88.81</td>
+<td style="text-align:right">82.26</td>
+<td style="text-align:right">84.29</td>
+</tr>
+<tr>
+<td style="text-align:left">english-ewt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.50</td>
+<td style="text-align:right">97.17</td>
+<td style="text-align:right">97.56</td>
+<td style="text-align:right">95.84</td>
+<td style="text-align:right">98.08</td>
+<td style="text-align:right">93.03</td>
+<td style="text-align:right">91.04</td>
+<td style="text-align:right">84.70</td>
+<td style="text-align:right">86.64</td>
+</tr>
+<tr>
+<td style="text-align:left">english-atis-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.98</td>
+<td style="text-align:right">80.49</td>
+<td style="text-align:right">99.04</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">98.14</td>
+<td style="text-align:right">99.63</td>
+<td style="text-align:right">94.45</td>
+<td style="text-align:right">93.02</td>
+<td style="text-align:right">87.97</td>
+<td style="text-align:right">90.18</td>
+</tr>
+<tr>
+<td style="text-align:left">english-atis-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.07</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.65</td>
+<td style="text-align:right">98.21</td>
+<td style="text-align:right">99.64</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">94.59</td>
+<td style="text-align:right">90.22</td>
+<td style="text-align:right">92.42</td>
+</tr>
+<tr>
+<td style="text-align:left">english-eslspok-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">92.21</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">98.54</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.10</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.37</td>
+<td style="text-align:right">93.87</td>
+<td style="text-align:right">91.26</td>
+<td style="text-align:right">93.01</td>
+</tr>
+<tr>
+<td style="text-align:left">english-eslspok-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.68</td>
+<td style="text-align:right">98.68</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.20</td>
+<td style="text-align:right">94.79</td>
+<td style="text-align:right">91.98</td>
+<td style="text-align:right">93.74</td>
+</tr>
+<tr>
+<td style="text-align:left">english-gum-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.63</td>
+<td style="text-align:right">95.72</td>
+<td style="text-align:right">98.00</td>
+<td style="text-align:right">98.04</td>
+<td style="text-align:right">97.91</td>
+<td style="text-align:right">97.02</td>
+<td style="text-align:right">98.84</td>
+<td style="text-align:right">92.87</td>
+<td style="text-align:right">90.96</td>
+<td style="text-align:right">85.35</td>
+<td style="text-align:right">87.10</td>
+</tr>
+<tr>
+<td style="text-align:left">english-gum-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.34</td>
+<td style="text-align:right">98.39</td>
+<td style="text-align:right">98.27</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">99.15</td>
+<td style="text-align:right">93.72</td>
+<td style="text-align:right">91.79</td>
+<td style="text-align:right">86.11</td>
+<td style="text-align:right">87.79</td>
+</tr>
+<tr>
+<td style="text-align:left">english-lines-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.92</td>
+<td style="text-align:right">87.45</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">96.86</td>
+<td style="text-align:right">97.03</td>
+<td style="text-align:right">94.48</td>
+<td style="text-align:right">98.33</td>
+<td style="text-align:right">91.32</td>
+<td style="text-align:right">88.55</td>
+<td style="text-align:right">80.61</td>
+<td style="text-align:right">83.70</td>
+</tr>
+<tr>
+<td style="text-align:left">english-lines-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.78</td>
+<td style="text-align:right">96.95</td>
+<td style="text-align:right">97.13</td>
+<td style="text-align:right">94.58</td>
+<td style="text-align:right">98.39</td>
+<td style="text-align:right">92.18</td>
+<td style="text-align:right">89.38</td>
+<td style="text-align:right">81.36</td>
+<td style="text-align:right">84.51</td>
+</tr>
+<tr>
+<td style="text-align:left">english-partut-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.72</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">97.43</td>
+<td style="text-align:right">97.29</td>
+<td style="text-align:right">96.44</td>
+<td style="text-align:right">95.41</td>
+<td style="text-align:right">98.17</td>
+<td style="text-align:right">94.24</td>
+<td style="text-align:right">92.33</td>
+<td style="text-align:right">83.28</td>
+<td style="text-align:right">87.38</td>
+</tr>
+<tr>
+<td style="text-align:left">english-partut-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">97.54</td>
+<td style="text-align:right">96.68</td>
+<td style="text-align:right">95.69</td>
+<td style="text-align:right">98.44</td>
+<td style="text-align:right">94.42</td>
+<td style="text-align:right">92.52</td>
+<td style="text-align:right">83.71</td>
+<td style="text-align:right">87.64</td>
+</tr>
+<tr>
+<td style="text-align:left">erzya-jr-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.18</td>
+<td style="text-align:right">94.15</td>
+<td style="text-align:right">87.94</td>
+<td style="text-align:right">87.38</td>
+<td style="text-align:right">78.90</td>
+<td style="text-align:right">73.49</td>
+<td style="text-align:right">84.89</td>
+<td style="text-align:right">72.92</td>
+<td style="text-align:right">63.24</td>
+<td style="text-align:right">41.32</td>
+<td style="text-align:right">48.34</td>
+</tr>
+<tr>
+<td style="text-align:left">erzya-jr-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">88.66</td>
+<td style="text-align:right">88.07</td>
+<td style="text-align:right">79.54</td>
+<td style="text-align:right">74.02</td>
+<td style="text-align:right">85.52</td>
+<td style="text-align:right">74.08</td>
+<td style="text-align:right">64.24</td>
+<td style="text-align:right">41.90</td>
+<td style="text-align:right">48.91</td>
+</tr>
+<tr>
+<td style="text-align:left">estonian-edt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.94</td>
+<td style="text-align:right">92.23</td>
+<td style="text-align:right">97.67</td>
+<td style="text-align:right">98.21</td>
+<td style="text-align:right">96.42</td>
+<td style="text-align:right">95.26</td>
+<td style="text-align:right">95.45</td>
+<td style="text-align:right">88.56</td>
+<td style="text-align:right">85.96</td>
+<td style="text-align:right">80.03</td>
+<td style="text-align:right">79.59</td>
+</tr>
+<tr>
+<td style="text-align:left">estonian-edt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.79</td>
+<td style="text-align:right">98.26</td>
+<td style="text-align:right">96.50</td>
+<td style="text-align:right">95.38</td>
+<td style="text-align:right">95.52</td>
+<td style="text-align:right">89.43</td>
+<td style="text-align:right">86.81</td>
+<td style="text-align:right">80.81</td>
+<td style="text-align:right">80.32</td>
+</tr>
+<tr>
+<td style="text-align:left">estonian-ewt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.63</td>
+<td style="text-align:right">78.03</td>
+<td style="text-align:right">94.88</td>
+<td style="text-align:right">96.14</td>
+<td style="text-align:right">94.10</td>
+<td style="text-align:right">91.81</td>
+<td style="text-align:right">93.75</td>
+<td style="text-align:right">83.23</td>
+<td style="text-align:right">80.01</td>
+<td style="text-align:right">72.15</td>
+<td style="text-align:right">73.37</td>
+</tr>
+<tr>
+<td style="text-align:left">estonian-ewt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.22</td>
+<td style="text-align:right">97.46</td>
+<td style="text-align:right">95.35</td>
+<td style="text-align:right">93.07</td>
+<td style="text-align:right">95.00</td>
+<td style="text-align:right">87.27</td>
+<td style="text-align:right">83.71</td>
+<td style="text-align:right">74.95</td>
+<td style="text-align:right">76.20</td>
+</tr>
+<tr>
+<td style="text-align:left">faroese-farpahc-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.74</td>
+<td style="text-align:right">92.77</td>
+<td style="text-align:right">97.45</td>
+<td style="text-align:right">93.00</td>
+<td style="text-align:right">94.24</td>
+<td style="text-align:right">92.32</td>
+<td style="text-align:right">99.74</td>
+<td style="text-align:right">86.01</td>
+<td style="text-align:right">82.29</td>
+<td style="text-align:right">68.12</td>
+<td style="text-align:right">75.32</td>
+</tr>
+<tr>
+<td style="text-align:left">faroese-farpahc-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.67</td>
+<td style="text-align:right">93.17</td>
+<td style="text-align:right">94.49</td>
+<td style="text-align:right">92.53</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">86.96</td>
+<td style="text-align:right">83.20</td>
+<td style="text-align:right">69.20</td>
+<td style="text-align:right">76.51</td>
+</tr>
+<tr>
+<td style="text-align:left">finnish-tdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.70</td>
+<td style="text-align:right">90.82</td>
+<td style="text-align:right">97.67</td>
+<td style="text-align:right">98.31</td>
+<td style="text-align:right">96.08</td>
+<td style="text-align:right">95.23</td>
+<td style="text-align:right">92.11</td>
+<td style="text-align:right">90.42</td>
+<td style="text-align:right">88.48</td>
+<td style="text-align:right">82.43</td>
+<td style="text-align:right">78.28</td>
+</tr>
+<tr>
+<td style="text-align:left">finnish-tdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.00</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">95.54</td>
+<td style="text-align:right">92.39</td>
+<td style="text-align:right">91.72</td>
+<td style="text-align:right">89.75</td>
+<td style="text-align:right">83.44</td>
+<td style="text-align:right">79.26</td>
+</tr>
+<tr>
+<td style="text-align:left">finnish-ftb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.91</td>
+<td style="text-align:right">86.84</td>
+<td style="text-align:right">96.70</td>
+<td style="text-align:right">95.08</td>
+<td style="text-align:right">96.78</td>
+<td style="text-align:right">94.01</td>
+<td style="text-align:right">95.76</td>
+<td style="text-align:right">90.17</td>
+<td style="text-align:right">87.35</td>
+<td style="text-align:right">80.13</td>
+<td style="text-align:right">80.78</td>
+</tr>
+<tr>
+<td style="text-align:left">finnish-ftb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.08</td>
+<td style="text-align:right">95.29</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">94.35</td>
+<td style="text-align:right">95.90</td>
+<td style="text-align:right">92.40</td>
+<td style="text-align:right">89.53</td>
+<td style="text-align:right">82.71</td>
+<td style="text-align:right">83.28</td>
+</tr>
+<tr>
+<td style="text-align:left">french-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.84</td>
+<td style="text-align:right">94.93</td>
+<td style="text-align:right">97.33</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">96.57</td>
+<td style="text-align:right">97.72</td>
+<td style="text-align:right">93.15</td>
+<td style="text-align:right">91.20</td>
+<td style="text-align:right">84.70</td>
+<td style="text-align:right">86.92</td>
+</tr>
+<tr>
+<td style="text-align:left">french-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.48</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.32</td>
+<td style="text-align:right">97.65</td>
+<td style="text-align:right">98.85</td>
+<td style="text-align:right">94.94</td>
+<td style="text-align:right">93.11</td>
+<td style="text-align:right">86.58</td>
+<td style="text-align:right">88.24</td>
+</tr>
+<tr>
+<td style="text-align:left">french-parisstories-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.73</td>
+<td style="text-align:right">93.08</td>
+<td style="text-align:right">97.20</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.07</td>
+<td style="text-align:right">91.20</td>
+<td style="text-align:right">98.02</td>
+<td style="text-align:right">79.94</td>
+<td style="text-align:right">76.66</td>
+<td style="text-align:right">62.32</td>
+<td style="text-align:right">71.73</td>
+</tr>
+<tr>
+<td style="text-align:left">french-parisstories-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.48</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.30</td>
+<td style="text-align:right">91.45</td>
+<td style="text-align:right">98.26</td>
+<td style="text-align:right">81.17</td>
+<td style="text-align:right">77.85</td>
+<td style="text-align:right">63.20</td>
+<td style="text-align:right">72.63</td>
+</tr>
+<tr>
+<td style="text-align:left">french-partut-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.42</td>
+<td style="text-align:right">98.64</td>
+<td style="text-align:right">97.43</td>
+<td style="text-align:right">96.97</td>
+<td style="text-align:right">95.28</td>
+<td style="text-align:right">94.51</td>
+<td style="text-align:right">97.89</td>
+<td style="text-align:right">94.44</td>
+<td style="text-align:right">92.83</td>
+<td style="text-align:right">82.58</td>
+<td style="text-align:right">87.48</td>
+</tr>
+<tr>
+<td style="text-align:left">french-partut-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.12</td>
+<td style="text-align:right">97.62</td>
+<td style="text-align:right">95.89</td>
+<td style="text-align:right">95.12</td>
+<td style="text-align:right">98.50</td>
+<td style="text-align:right">95.35</td>
+<td style="text-align:right">93.89</td>
+<td style="text-align:right">83.73</td>
+<td style="text-align:right">88.49</td>
+</tr>
+<tr>
+<td style="text-align:left">french-rhapsodie-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.16</td>
+<td style="text-align:right">99.82</td>
+<td style="text-align:right">97.31</td>
+<td style="text-align:right">97.37</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">93.38</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">88.06</td>
+<td style="text-align:right">84.92</td>
+<td style="text-align:right">75.51</td>
+<td style="text-align:right">80.31</td>
+</tr>
+<tr>
+<td style="text-align:left">french-rhapsodie-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">98.11</td>
+<td style="text-align:right">97.02</td>
+<td style="text-align:right">94.15</td>
+<td style="text-align:right">99.00</td>
+<td style="text-align:right">89.33</td>
+<td style="text-align:right">86.14</td>
+<td style="text-align:right">76.49</td>
+<td style="text-align:right">80.94</td>
+</tr>
+<tr>
+<td style="text-align:left">french-sequoia-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.15</td>
+<td style="text-align:right">89.53</td>
+<td style="text-align:right">98.40</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.19</td>
+<td style="text-align:right">96.84</td>
+<td style="text-align:right">98.30</td>
+<td style="text-align:right">94.06</td>
+<td style="text-align:right">92.75</td>
+<td style="text-align:right">86.39</td>
+<td style="text-align:right">89.39</td>
+</tr>
+<tr>
+<td style="text-align:left">french-sequoia-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.25</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.01</td>
+<td style="text-align:right">97.63</td>
+<td style="text-align:right">99.14</td>
+<td style="text-align:right">95.63</td>
+<td style="text-align:right">94.37</td>
+<td style="text-align:right">88.23</td>
+<td style="text-align:right">90.53</td>
+</tr>
+<tr>
+<td style="text-align:left">galician-treegal-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.74</td>
+<td style="text-align:right">87.99</td>
+<td style="text-align:right">95.93</td>
+<td style="text-align:right">93.63</td>
+<td style="text-align:right">94.83</td>
+<td style="text-align:right">92.83</td>
+<td style="text-align:right">96.76</td>
+<td style="text-align:right">83.46</td>
+<td style="text-align:right">79.60</td>
+<td style="text-align:right">67.95</td>
+<td style="text-align:right">71.94</td>
+</tr>
+<tr>
+<td style="text-align:left">galician-treegal-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.19</td>
+<td style="text-align:right">94.72</td>
+<td style="text-align:right">95.89</td>
+<td style="text-align:right">93.88</td>
+<td style="text-align:right">97.90</td>
+<td style="text-align:right">86.99</td>
+<td style="text-align:right">82.78</td>
+<td style="text-align:right">71.43</td>
+<td style="text-align:right">75.90</td>
+</tr>
+<tr>
+<td style="text-align:left">galician-ctg-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.22</td>
+<td style="text-align:right">97.22</td>
+<td style="text-align:right">97.24</td>
+<td style="text-align:right">97.07</td>
+<td style="text-align:right">99.05</td>
+<td style="text-align:right">96.65</td>
+<td style="text-align:right">98.12</td>
+<td style="text-align:right">85.14</td>
+<td style="text-align:right">82.72</td>
+<td style="text-align:right">71.07</td>
+<td style="text-align:right">75.57</td>
+</tr>
+<tr>
+<td style="text-align:left">galician-ctg-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.97</td>
+<td style="text-align:right">97.79</td>
+<td style="text-align:right">99.83</td>
+<td style="text-align:right">97.35</td>
+<td style="text-align:right">98.86</td>
+<td style="text-align:right">86.86</td>
+<td style="text-align:right">84.31</td>
+<td style="text-align:right">73.03</td>
+<td style="text-align:right">77.52</td>
+</tr>
+<tr>
+<td style="text-align:left">german-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.76</td>
+<td style="text-align:right">82.68</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">97.53</td>
+<td style="text-align:right">90.78</td>
+<td style="text-align:right">88.15</td>
+<td style="text-align:right">96.91</td>
+<td style="text-align:right">87.04</td>
+<td style="text-align:right">83.20</td>
+<td style="text-align:right">65.39</td>
+<td style="text-align:right">75.45</td>
+</tr>
+<tr>
+<td style="text-align:left">german-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.47</td>
+<td style="text-align:right">97.80</td>
+<td style="text-align:right">91.21</td>
+<td style="text-align:right">88.63</td>
+<td style="text-align:right">97.18</td>
+<td style="text-align:right">88.79</td>
+<td style="text-align:right">84.99</td>
+<td style="text-align:right">66.97</td>
+<td style="text-align:right">77.23</td>
+</tr>
+<tr>
+<td style="text-align:left">german-hdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.90</td>
+<td style="text-align:right">92.39</td>
+<td style="text-align:right">98.55</td>
+<td style="text-align:right">98.46</td>
+<td style="text-align:right">94.21</td>
+<td style="text-align:right">93.81</td>
+<td style="text-align:right">97.69</td>
+<td style="text-align:right">96.90</td>
+<td style="text-align:right">96.00</td>
+<td style="text-align:right">84.87</td>
+<td style="text-align:right">90.50</td>
+</tr>
+<tr>
+<td style="text-align:left">german-hdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.66</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">94.34</td>
+<td style="text-align:right">93.95</td>
+<td style="text-align:right">97.79</td>
+<td style="text-align:right">97.60</td>
+<td style="text-align:right">96.71</td>
+<td style="text-align:right">85.54</td>
+<td style="text-align:right">91.20</td>
+</tr>
+<tr>
+<td style="text-align:left">gothic-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">31.12</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">96.70</td>
+<td style="text-align:right">89.88</td>
+<td style="text-align:right">87.80</td>
+<td style="text-align:right">94.71</td>
+<td style="text-align:right">78.72</td>
+<td style="text-align:right">72.74</td>
+<td style="text-align:right">58.81</td>
+<td style="text-align:right">63.43</td>
+</tr>
+<tr>
+<td style="text-align:left">gothic-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.85</td>
+<td style="text-align:right">97.22</td>
+<td style="text-align:right">91.01</td>
+<td style="text-align:right">89.27</td>
+<td style="text-align:right">94.78</td>
+<td style="text-align:right">86.66</td>
+<td style="text-align:right">80.81</td>
+<td style="text-align:right">68.63</td>
+<td style="text-align:right">72.61</td>
+</tr>
+<tr>
+<td style="text-align:left">greek-gdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.87</td>
+<td style="text-align:right">90.19</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">98.21</td>
+<td style="text-align:right">95.72</td>
+<td style="text-align:right">95.10</td>
+<td style="text-align:right">96.09</td>
+<td style="text-align:right">92.99</td>
+<td style="text-align:right">91.18</td>
+<td style="text-align:right">81.67</td>
+<td style="text-align:right">81.75</td>
+</tr>
+<tr>
+<td style="text-align:left">greek-gdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.32</td>
+<td style="text-align:right">98.34</td>
+<td style="text-align:right">95.83</td>
+<td style="text-align:right">95.20</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">93.80</td>
+<td style="text-align:right">91.91</td>
+<td style="text-align:right">82.25</td>
+<td style="text-align:right">82.38</td>
+</tr>
+<tr>
+<td style="text-align:left">greek-gud-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.92</td>
+<td style="text-align:right">94.98</td>
+<td style="text-align:right">97.01</td>
+<td style="text-align:right">96.26</td>
+<td style="text-align:right">94.24</td>
+<td style="text-align:right">90.55</td>
+<td style="text-align:right">95.76</td>
+<td style="text-align:right">92.94</td>
+<td style="text-align:right">90.06</td>
+<td style="text-align:right">75.94</td>
+<td style="text-align:right">80.42</td>
+</tr>
+<tr>
+<td style="text-align:left">greek-gud-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.11</td>
+<td style="text-align:right">96.32</td>
+<td style="text-align:right">94.32</td>
+<td style="text-align:right">90.65</td>
+<td style="text-align:right">95.83</td>
+<td style="text-align:right">93.59</td>
+<td style="text-align:right">90.68</td>
+<td style="text-align:right">76.44</td>
+<td style="text-align:right">80.91</td>
+</tr>
+<tr>
+<td style="text-align:left">hebrew-htb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">85.10</td>
+<td style="text-align:right">99.69</td>
+<td style="text-align:right">82.96</td>
+<td style="text-align:right">82.95</td>
+<td style="text-align:right">81.30</td>
+<td style="text-align:right">80.69</td>
+<td style="text-align:right">83.02</td>
+<td style="text-align:right">70.71</td>
+<td style="text-align:right">68.21</td>
+<td style="text-align:right">55.84</td>
+<td style="text-align:right">60.10</td>
+</tr>
+<tr>
+<td style="text-align:left">hebrew-htb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.64</td>
+<td style="text-align:right">97.62</td>
+<td style="text-align:right">95.79</td>
+<td style="text-align:right">95.27</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">92.45</td>
+<td style="text-align:right">89.94</td>
+<td style="text-align:right">79.28</td>
+<td style="text-align:right">82.12</td>
+</tr>
+<tr>
+<td style="text-align:left">hebrew-iahltwiki-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">88.54</td>
+<td style="text-align:right">97.16</td>
+<td style="text-align:right">85.97</td>
+<td style="text-align:right">85.97</td>
+<td style="text-align:right">81.45</td>
+<td style="text-align:right">80.46</td>
+<td style="text-align:right">87.15</td>
+<td style="text-align:right">76.11</td>
+<td style="text-align:right">74.26</td>
+<td style="text-align:right">57.99</td>
+<td style="text-align:right">67.30</td>
+</tr>
+<tr>
+<td style="text-align:left">hebrew-iahltwiki-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.09</td>
+<td style="text-align:right">97.09</td>
+<td style="text-align:right">92.18</td>
+<td style="text-align:right">91.10</td>
+<td style="text-align:right">98.29</td>
+<td style="text-align:right">93.66</td>
+<td style="text-align:right">91.26</td>
+<td style="text-align:right">75.14</td>
+<td style="text-align:right">85.53</td>
+</tr>
+<tr>
+<td style="text-align:left">hindi-hdtb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.72</td>
+<td style="text-align:right">97.74</td>
+<td style="text-align:right">97.35</td>
+<td style="text-align:right">94.23</td>
+<td style="text-align:right">92.39</td>
+<td style="text-align:right">98.93</td>
+<td style="text-align:right">95.31</td>
+<td style="text-align:right">92.43</td>
+<td style="text-align:right">79.64</td>
+<td style="text-align:right">87.78</td>
+</tr>
+<tr>
+<td style="text-align:left">hindi-hdtb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.74</td>
+<td style="text-align:right">97.34</td>
+<td style="text-align:right">94.25</td>
+<td style="text-align:right">92.40</td>
+<td style="text-align:right">98.94</td>
+<td style="text-align:right">95.43</td>
+<td style="text-align:right">92.55</td>
+<td style="text-align:right">79.77</td>
+<td style="text-align:right">87.94</td>
+</tr>
+<tr>
+<td style="text-align:left">hungarian-szeged-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.85</td>
+<td style="text-align:right">95.89</td>
+<td style="text-align:right">96.68</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">93.47</td>
+<td style="text-align:right">94.89</td>
+<td style="text-align:right">88.56</td>
+<td style="text-align:right">84.89</td>
+<td style="text-align:right">74.96</td>
+<td style="text-align:right">78.33</td>
+</tr>
+<tr>
+<td style="text-align:left">hungarian-szeged-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.77</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.31</td>
+<td style="text-align:right">93.57</td>
+<td style="text-align:right">95.01</td>
+<td style="text-align:right">88.99</td>
+<td style="text-align:right">85.30</td>
+<td style="text-align:right">75.22</td>
+<td style="text-align:right">78.65</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-modern-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.37</td>
+<td style="text-align:right">94.59</td>
+<td style="text-align:right">97.58</td>
+<td style="text-align:right">95.34</td>
+<td style="text-align:right">88.49</td>
+<td style="text-align:right">85.62</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">86.05</td>
+<td style="text-align:right">83.30</td>
+<td style="text-align:right">64.64</td>
+<td style="text-align:right">75.54</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-modern-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.15</td>
+<td style="text-align:right">95.92</td>
+<td style="text-align:right">88.93</td>
+<td style="text-align:right">86.07</td>
+<td style="text-align:right">97.45</td>
+<td style="text-align:right">87.03</td>
+<td style="text-align:right">84.17</td>
+<td style="text-align:right">65.30</td>
+<td style="text-align:right">76.47</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-gc-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.72</td>
+<td style="text-align:right">94.64</td>
+<td style="text-align:right">94.72</td>
+<td style="text-align:right">82.28</td>
+<td style="text-align:right">85.01</td>
+<td style="text-align:right">79.83</td>
+<td style="text-align:right">91.64</td>
+<td style="text-align:right">83.22</td>
+<td style="text-align:right">78.78</td>
+<td style="text-align:right">58.56</td>
+<td style="text-align:right">68.85</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-gc-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.06</td>
+<td style="text-align:right">82.71</td>
+<td style="text-align:right">85.52</td>
+<td style="text-align:right">80.34</td>
+<td style="text-align:right">91.81</td>
+<td style="text-align:right">84.14</td>
+<td style="text-align:right">79.66</td>
+<td style="text-align:right">59.21</td>
+<td style="text-align:right">69.49</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-icepahc-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.80</td>
+<td style="text-align:right">92.67</td>
+<td style="text-align:right">96.90</td>
+<td style="text-align:right">93.31</td>
+<td style="text-align:right">92.01</td>
+<td style="text-align:right">87.13</td>
+<td style="text-align:right">96.24</td>
+<td style="text-align:right">87.30</td>
+<td style="text-align:right">83.46</td>
+<td style="text-align:right">66.91</td>
+<td style="text-align:right">74.57</td>
+</tr>
+<tr>
+<td style="text-align:left">icelandic-icepahc-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.08</td>
+<td style="text-align:right">93.55</td>
+<td style="text-align:right">92.18</td>
+<td style="text-align:right">87.35</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">87.85</td>
+<td style="text-align:right">83.95</td>
+<td style="text-align:right">67.40</td>
+<td style="text-align:right">75.14</td>
+</tr>
+<tr>
+<td style="text-align:left">indonesian-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.49</td>
+<td style="text-align:right">92.35</td>
+<td style="text-align:right">94.35</td>
+<td style="text-align:right">94.03</td>
+<td style="text-align:right">95.77</td>
+<td style="text-align:right">89.10</td>
+<td style="text-align:right">98.12</td>
+<td style="text-align:right">87.62</td>
+<td style="text-align:right">81.71</td>
+<td style="text-align:right">72.43</td>
+<td style="text-align:right">76.99</td>
+</tr>
+<tr>
+<td style="text-align:left">indonesian-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.79</td>
+<td style="text-align:right">94.41</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">89.42</td>
+<td style="text-align:right">98.52</td>
+<td style="text-align:right">88.41</td>
+<td style="text-align:right">82.43</td>
+<td style="text-align:right">73.18</td>
+<td style="text-align:right">77.77</td>
+</tr>
+<tr>
+<td style="text-align:left">indonesian-csui-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.45</td>
+<td style="text-align:right">91.01</td>
+<td style="text-align:right">95.88</td>
+<td style="text-align:right">96.07</td>
+<td style="text-align:right">96.66</td>
+<td style="text-align:right">95.33</td>
+<td style="text-align:right">98.11</td>
+<td style="text-align:right">85.95</td>
+<td style="text-align:right">81.63</td>
+<td style="text-align:right">76.18</td>
+<td style="text-align:right">78.21</td>
+</tr>
+<tr>
+<td style="text-align:left">indonesian-csui-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.34</td>
+<td style="text-align:right">96.58</td>
+<td style="text-align:right">97.15</td>
+<td style="text-align:right">95.78</td>
+<td style="text-align:right">98.74</td>
+<td style="text-align:right">87.26</td>
+<td style="text-align:right">82.71</td>
+<td style="text-align:right">77.14</td>
+<td style="text-align:right">79.20</td>
+</tr>
+<tr>
+<td style="text-align:left">irish-idt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.88</td>
+<td style="text-align:right">97.58</td>
+<td style="text-align:right">96.04</td>
+<td style="text-align:right">94.90</td>
+<td style="text-align:right">90.84</td>
+<td style="text-align:right">87.69</td>
+<td style="text-align:right">95.85</td>
+<td style="text-align:right">86.48</td>
+<td style="text-align:right">80.95</td>
+<td style="text-align:right">64.53</td>
+<td style="text-align:right">71.46</td>
+</tr>
+<tr>
+<td style="text-align:left">irish-idt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.13</td>
+<td style="text-align:right">95.08</td>
+<td style="text-align:right">90.97</td>
+<td style="text-align:right">87.85</td>
+<td style="text-align:right">95.97</td>
+<td style="text-align:right">86.75</td>
+<td style="text-align:right">81.19</td>
+<td style="text-align:right">64.56</td>
+<td style="text-align:right">71.53</td>
+</tr>
+<tr>
+<td style="text-align:left">irish-twittirish-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.50</td>
+<td style="text-align:right">46.62</td>
+<td style="text-align:right">90.58</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">90.58</td>
+<td style="text-align:right">88.41</td>
+<td style="text-align:right">78.58</td>
+<td style="text-align:right">72.34</td>
+<td style="text-align:right">58.38</td>
+<td style="text-align:right">56.97</td>
+</tr>
+<tr>
+<td style="text-align:left">irish-twittirish-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.80</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.80</td>
+<td style="text-align:right">89.57</td>
+<td style="text-align:right">85.75</td>
+<td style="text-align:right">79.31</td>
+<td style="text-align:right">66.72</td>
+<td style="text-align:right">64.16</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-isdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.74</td>
+<td style="text-align:right">99.07</td>
+<td style="text-align:right">98.44</td>
+<td style="text-align:right">98.38</td>
+<td style="text-align:right">98.14</td>
+<td style="text-align:right">97.64</td>
+<td style="text-align:right">98.68</td>
+<td style="text-align:right">94.73</td>
+<td style="text-align:right">93.05</td>
+<td style="text-align:right">86.79</td>
+<td style="text-align:right">88.06</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-isdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.71</td>
+<td style="text-align:right">98.64</td>
+<td style="text-align:right">98.39</td>
+<td style="text-align:right">97.89</td>
+<td style="text-align:right">98.95</td>
+<td style="text-align:right">95.14</td>
+<td style="text-align:right">93.47</td>
+<td style="text-align:right">87.19</td>
+<td style="text-align:right">88.54</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-markit-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.62</td>
+<td style="text-align:right">98.24</td>
+<td style="text-align:right">96.96</td>
+<td style="text-align:right">97.13</td>
+<td style="text-align:right">94.12</td>
+<td style="text-align:right">92.60</td>
+<td style="text-align:right">88.18</td>
+<td style="text-align:right">88.60</td>
+<td style="text-align:right">84.72</td>
+<td style="text-align:right">70.64</td>
+<td style="text-align:right">77.87</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-markit-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.35</td>
+<td style="text-align:right">97.52</td>
+<td style="text-align:right">94.39</td>
+<td style="text-align:right">92.88</td>
+<td style="text-align:right">88.50</td>
+<td style="text-align:right">89.39</td>
+<td style="text-align:right">85.51</td>
+<td style="text-align:right">71.25</td>
+<td style="text-align:right">78.65</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-parlamint-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.42</td>
+<td style="text-align:right">94.12</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">97.96</td>
+<td style="text-align:right">97.95</td>
+<td style="text-align:right">97.05</td>
+<td style="text-align:right">98.63</td>
+<td style="text-align:right">91.93</td>
+<td style="text-align:right">89.97</td>
+<td style="text-align:right">84.20</td>
+<td style="text-align:right">86.02</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-parlamint-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.17</td>
+<td style="text-align:right">98.52</td>
+<td style="text-align:right">98.50</td>
+<td style="text-align:right">97.58</td>
+<td style="text-align:right">99.16</td>
+<td style="text-align:right">93.41</td>
+<td style="text-align:right">91.44</td>
+<td style="text-align:right">85.80</td>
+<td style="text-align:right">87.60</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-partut-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.73</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.41</td>
+<td style="text-align:right">98.41</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">97.64</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">96.15</td>
+<td style="text-align:right">94.15</td>
+<td style="text-align:right">87.84</td>
+<td style="text-align:right">88.90</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-partut-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.52</td>
+<td style="text-align:right">98.52</td>
+<td style="text-align:right">98.27</td>
+<td style="text-align:right">97.72</td>
+<td style="text-align:right">98.82</td>
+<td style="text-align:right">96.18</td>
+<td style="text-align:right">94.09</td>
+<td style="text-align:right">87.68</td>
+<td style="text-align:right">88.80</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-postwita-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.36</td>
+<td style="text-align:right">49.53</td>
+<td style="text-align:right">96.58</td>
+<td style="text-align:right">96.33</td>
+<td style="text-align:right">96.33</td>
+<td style="text-align:right">94.80</td>
+<td style="text-align:right">96.62</td>
+<td style="text-align:right">82.80</td>
+<td style="text-align:right">79.03</td>
+<td style="text-align:right">68.81</td>
+<td style="text-align:right">70.55</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-postwita-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.17</td>
+<td style="text-align:right">96.95</td>
+<td style="text-align:right">96.90</td>
+<td style="text-align:right">95.44</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">87.96</td>
+<td style="text-align:right">83.79</td>
+<td style="text-align:right">75.19</td>
+<td style="text-align:right">76.95</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-twittiro-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.94</td>
+<td style="text-align:right">46.67</td>
+<td style="text-align:right">95.91</td>
+<td style="text-align:right">95.74</td>
+<td style="text-align:right">94.94</td>
+<td style="text-align:right">93.42</td>
+<td style="text-align:right">94.57</td>
+<td style="text-align:right">83.09</td>
+<td style="text-align:right">78.65</td>
+<td style="text-align:right">66.30</td>
+<td style="text-align:right">66.97</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-twittiro-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.84</td>
+<td style="text-align:right">96.57</td>
+<td style="text-align:right">95.87</td>
+<td style="text-align:right">94.15</td>
+<td style="text-align:right">95.43</td>
+<td style="text-align:right">88.34</td>
+<td style="text-align:right">83.43</td>
+<td style="text-align:right">71.82</td>
+<td style="text-align:right">72.62</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-vit-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.74</td>
+<td style="text-align:right">94.87</td>
+<td style="text-align:right">98.11</td>
+<td style="text-align:right">97.29</td>
+<td style="text-align:right">97.65</td>
+<td style="text-align:right">96.15</td>
+<td style="text-align:right">98.87</td>
+<td style="text-align:right">92.22</td>
+<td style="text-align:right">89.43</td>
+<td style="text-align:right">81.28</td>
+<td style="text-align:right">84.07</td>
+</tr>
+<tr>
+<td style="text-align:left">italian-vit-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.35</td>
+<td style="text-align:right">97.65</td>
+<td style="text-align:right">97.87</td>
+<td style="text-align:right">96.51</td>
+<td style="text-align:right">99.10</td>
+<td style="text-align:right">92.94</td>
+<td style="text-align:right">90.12</td>
+<td style="text-align:right">81.99</td>
+<td style="text-align:right">84.78</td>
+</tr>
+<tr>
+<td style="text-align:left">japanese-gsdluw-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">95.18</td>
+<td style="text-align:right">99.72</td>
+<td style="text-align:right">93.82</td>
+<td style="text-align:right">93.50</td>
+<td style="text-align:right">95.18</td>
+<td style="text-align:right">93.44</td>
+<td style="text-align:right">93.56</td>
+<td style="text-align:right">86.27</td>
+<td style="text-align:right">85.58</td>
+<td style="text-align:right">76.26</td>
+<td style="text-align:right">76.41</td>
+</tr>
+<tr>
+<td style="text-align:left">japanese-gsdluw-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.36</td>
+<td style="text-align:right">98.01</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">97.90</td>
+<td style="text-align:right">97.78</td>
+<td style="text-align:right">95.16</td>
+<td style="text-align:right">94.19</td>
+<td style="text-align:right">86.28</td>
+<td style="text-align:right">84.89</td>
+</tr>
+<tr>
+<td style="text-align:left">japanese-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">96.17</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">94.97</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">93.85</td>
+<td style="text-align:right">95.03</td>
+<td style="text-align:right">87.91</td>
+<td style="text-align:right">87.07</td>
+<td style="text-align:right">80.80</td>
+<td style="text-align:right">80.98</td>
+</tr>
+<tr>
+<td style="text-align:left">japanese-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.59</td>
+<td style="text-align:right">97.52</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">97.20</td>
+<td style="text-align:right">98.47</td>
+<td style="text-align:right">94.93</td>
+<td style="text-align:right">93.94</td>
+<td style="text-align:right">88.80</td>
+<td style="text-align:right">88.47</td>
+</tr>
+<tr>
+<td style="text-align:left">korean-kaist-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">96.19</td>
+<td style="text-align:right">87.78</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">87.58</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">88.85</td>
+<td style="text-align:right">86.92</td>
+<td style="text-align:right">82.77</td>
+<td style="text-align:right">80.35</td>
+</tr>
+<tr>
+<td style="text-align:left">korean-kaist-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.19</td>
+<td style="text-align:right">87.78</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">87.58</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">88.85</td>
+<td style="text-align:right">86.92</td>
+<td style="text-align:right">82.77</td>
+<td style="text-align:right">80.35</td>
+</tr>
+<tr>
+<td style="text-align:left">korean-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.87</td>
+<td style="text-align:right">93.93</td>
+<td style="text-align:right">96.54</td>
+<td style="text-align:right">90.07</td>
+<td style="text-align:right">99.67</td>
+<td style="text-align:right">87.94</td>
+<td style="text-align:right">93.62</td>
+<td style="text-align:right">87.88</td>
+<td style="text-align:right">83.98</td>
+<td style="text-align:right">80.68</td>
+<td style="text-align:right">76.82</td>
+</tr>
+<tr>
+<td style="text-align:left">korean-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.72</td>
+<td style="text-align:right">90.24</td>
+<td style="text-align:right">99.79</td>
+<td style="text-align:right">88.12</td>
+<td style="text-align:right">93.74</td>
+<td style="text-align:right">88.69</td>
+<td style="text-align:right">84.76</td>
+<td style="text-align:right">81.49</td>
+<td style="text-align:right">77.58</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-ittb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">91.21</td>
+<td style="text-align:right">99.01</td>
+<td style="text-align:right">96.65</td>
+<td style="text-align:right">97.07</td>
+<td style="text-align:right">95.62</td>
+<td style="text-align:right">99.16</td>
+<td style="text-align:right">90.25</td>
+<td style="text-align:right">88.31</td>
+<td style="text-align:right">82.53</td>
+<td style="text-align:right">85.95</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-ittb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.03</td>
+<td style="text-align:right">96.66</td>
+<td style="text-align:right">97.12</td>
+<td style="text-align:right">95.64</td>
+<td style="text-align:right">99.18</td>
+<td style="text-align:right">91.28</td>
+<td style="text-align:right">89.35</td>
+<td style="text-align:right">83.17</td>
+<td style="text-align:right">86.55</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-llct-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">99.49</td>
+<td style="text-align:right">99.75</td>
+<td style="text-align:right">97.14</td>
+<td style="text-align:right">97.15</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">97.76</td>
+<td style="text-align:right">95.37</td>
+<td style="text-align:right">94.37</td>
+<td style="text-align:right">89.06</td>
+<td style="text-align:right">90.39</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-llct-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.75</td>
+<td style="text-align:right">97.14</td>
+<td style="text-align:right">97.16</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">97.77</td>
+<td style="text-align:right">95.39</td>
+<td style="text-align:right">94.39</td>
+<td style="text-align:right">89.07</td>
+<td style="text-align:right">90.41</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-perseus-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.95</td>
+<td style="text-align:right">98.99</td>
+<td style="text-align:right">92.88</td>
+<td style="text-align:right">81.11</td>
+<td style="text-align:right">84.60</td>
+<td style="text-align:right">77.45</td>
+<td style="text-align:right">88.86</td>
+<td style="text-align:right">78.92</td>
+<td style="text-align:right">71.78</td>
+<td style="text-align:right">53.50</td>
+<td style="text-align:right">59.27</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-perseus-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.95</td>
+<td style="text-align:right">81.14</td>
+<td style="text-align:right">84.65</td>
+<td style="text-align:right">77.49</td>
+<td style="text-align:right">88.89</td>
+<td style="text-align:right">79.08</td>
+<td style="text-align:right">71.91</td>
+<td style="text-align:right">53.59</td>
+<td style="text-align:right">59.31</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.85</td>
+<td style="text-align:right">37.40</td>
+<td style="text-align:right">96.60</td>
+<td style="text-align:right">96.69</td>
+<td style="text-align:right">90.66</td>
+<td style="text-align:right">89.40</td>
+<td style="text-align:right">96.19</td>
+<td style="text-align:right">76.66</td>
+<td style="text-align:right">72.46</td>
+<td style="text-align:right">59.50</td>
+<td style="text-align:right">64.96</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.02</td>
+<td style="text-align:right">97.12</td>
+<td style="text-align:right">91.43</td>
+<td style="text-align:right">90.31</td>
+<td style="text-align:right">96.42</td>
+<td style="text-align:right">83.88</td>
+<td style="text-align:right">79.55</td>
+<td style="text-align:right">67.88</td>
+<td style="text-align:right">73.35</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-udante-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.61</td>
+<td style="text-align:right">98.81</td>
+<td style="text-align:right">90.94</td>
+<td style="text-align:right">75.50</td>
+<td style="text-align:right">84.14</td>
+<td style="text-align:right">72.23</td>
+<td style="text-align:right">86.97</td>
+<td style="text-align:right">75.88</td>
+<td style="text-align:right">68.63</td>
+<td style="text-align:right">47.63</td>
+<td style="text-align:right">51.46</td>
+</tr>
+<tr>
+<td style="text-align:left">latin-udante-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.18</td>
+<td style="text-align:right">75.56</td>
+<td style="text-align:right">84.38</td>
+<td style="text-align:right">72.29</td>
+<td style="text-align:right">87.20</td>
+<td style="text-align:right">75.95</td>
+<td style="text-align:right">68.65</td>
+<td style="text-align:right">47.73</td>
+<td style="text-align:right">51.44</td>
+</tr>
+<tr>
+<td style="text-align:left">latvian-lvtb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.29</td>
+<td style="text-align:right">97.80</td>
+<td style="text-align:right">96.79</td>
+<td style="text-align:right">90.92</td>
+<td style="text-align:right">94.75</td>
+<td style="text-align:right">90.16</td>
+<td style="text-align:right">96.57</td>
+<td style="text-align:right">88.79</td>
+<td style="text-align:right">85.85</td>
+<td style="text-align:right">77.56</td>
+<td style="text-align:right">81.04</td>
+</tr>
+<tr>
+<td style="text-align:left">latvian-lvtb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.44</td>
+<td style="text-align:right">91.56</td>
+<td style="text-align:right">95.44</td>
+<td style="text-align:right">90.77</td>
+<td style="text-align:right">97.21</td>
+<td style="text-align:right">89.95</td>
+<td style="text-align:right">86.94</td>
+<td style="text-align:right">78.74</td>
+<td style="text-align:right">82.16</td>
+</tr>
+<tr>
+<td style="text-align:left">lithuanian-alksnis-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.91</td>
+<td style="text-align:right">87.87</td>
+<td style="text-align:right">95.95</td>
+<td style="text-align:right">90.31</td>
+<td style="text-align:right">91.09</td>
+<td style="text-align:right">89.50</td>
+<td style="text-align:right">93.45</td>
+<td style="text-align:right">82.74</td>
+<td style="text-align:right">78.94</td>
+<td style="text-align:right">68.03</td>
+<td style="text-align:right">71.20</td>
+</tr>
+<tr>
+<td style="text-align:left">lithuanian-alksnis-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.08</td>
+<td style="text-align:right">90.44</td>
+<td style="text-align:right">91.27</td>
+<td style="text-align:right">89.64</td>
+<td style="text-align:right">93.56</td>
+<td style="text-align:right">83.94</td>
+<td style="text-align:right">80.08</td>
+<td style="text-align:right">68.93</td>
+<td style="text-align:right">72.06</td>
+</tr>
+<tr>
+<td style="text-align:left">lithuanian-hse-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.30</td>
+<td style="text-align:right">97.30</td>
+<td style="text-align:right">89.93</td>
+<td style="text-align:right">90.03</td>
+<td style="text-align:right">81.92</td>
+<td style="text-align:right">79.03</td>
+<td style="text-align:right">88.16</td>
+<td style="text-align:right">71.85</td>
+<td style="text-align:right">62.63</td>
+<td style="text-align:right">44.48</td>
+<td style="text-align:right">53.82</td>
+</tr>
+<tr>
+<td style="text-align:left">lithuanian-hse-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.32</td>
+<td style="text-align:right">91.42</td>
+<td style="text-align:right">83.40</td>
+<td style="text-align:right">80.09</td>
+<td style="text-align:right">90.75</td>
+<td style="text-align:right">75.00</td>
+<td style="text-align:right">65.00</td>
+<td style="text-align:right">45.87</td>
+<td style="text-align:right">55.84</td>
+</tr>
+<tr>
+<td style="text-align:left">maghrebi_arabic_french-arabizi-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">91.65</td>
+<td style="text-align:right">7.00</td>
+<td style="text-align:right">78.81</td>
+<td style="text-align:right">71.59</td>
+<td style="text-align:right">82.65</td>
+<td style="text-align:right">69.81</td>
+<td style="text-align:right">50.63</td>
+<td style="text-align:right">57.90</td>
+<td style="text-align:right">49.93</td>
+<td style="text-align:right">36.22</td>
+<td style="text-align:right">24.59</td>
+</tr>
+<tr>
+<td style="text-align:left">maghrebi_arabic_french-arabizi-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">86.69</td>
+<td style="text-align:right">78.89</td>
+<td style="text-align:right">90.82</td>
+<td style="text-align:right">77.88</td>
+<td style="text-align:right">54.66</td>
+<td style="text-align:right">76.32</td>
+<td style="text-align:right">65.86</td>
+<td style="text-align:right">47.72</td>
+<td style="text-align:right">31.57</td>
+</tr>
+<tr>
+<td style="text-align:left">maltese-mudt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.84</td>
+<td style="text-align:right">86.29</td>
+<td style="text-align:right">95.73</td>
+<td style="text-align:right">95.79</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.31</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">85.08</td>
+<td style="text-align:right">80.25</td>
+<td style="text-align:right">68.88</td>
+<td style="text-align:right">73.05</td>
+</tr>
+<tr>
+<td style="text-align:left">maltese-mudt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.87</td>
+<td style="text-align:right">95.92</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.46</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">85.70</td>
+<td style="text-align:right">80.81</td>
+<td style="text-align:right">69.28</td>
+<td style="text-align:right">73.43</td>
+</tr>
+<tr>
+<td style="text-align:left">manx-cadhan-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">98.25</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.78</td>
+<td style="text-align:right">93.37</td>
+<td style="text-align:right">93.43</td>
+<td style="text-align:right">87.42</td>
+<td style="text-align:right">84.02</td>
+<td style="text-align:right">77.75</td>
+<td style="text-align:right">78.03</td>
+</tr>
+<tr>
+<td style="text-align:left">manx-cadhan-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.77</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.39</td>
+<td style="text-align:right">95.93</td>
+<td style="text-align:right">95.98</td>
+<td style="text-align:right">92.47</td>
+<td style="text-align:right">89.13</td>
+<td style="text-align:right">83.16</td>
+<td style="text-align:right">82.07</td>
+</tr>
+<tr>
+<td style="text-align:left">marathi-ufal-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">94.16</td>
+<td style="text-align:right">92.63</td>
+<td style="text-align:right">82.73</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">74.21</td>
+<td style="text-align:right">70.80</td>
+<td style="text-align:right">84.91</td>
+<td style="text-align:right">68.13</td>
+<td style="text-align:right">60.83</td>
+<td style="text-align:right">39.75</td>
+<td style="text-align:right">47.62</td>
+</tr>
+<tr>
+<td style="text-align:left">marathi-ufal-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">87.14</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">76.94</td>
+<td style="text-align:right">73.06</td>
+<td style="text-align:right">87.86</td>
+<td style="text-align:right">73.79</td>
+<td style="text-align:right">65.29</td>
+<td style="text-align:right">41.82</td>
+<td style="text-align:right">50.10</td>
+</tr>
+<tr>
+<td style="text-align:left">naija-nsc-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.95</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.04</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.92</td>
+<td style="text-align:right">97.53</td>
+<td style="text-align:right">99.33</td>
+<td style="text-align:right">93.02</td>
+<td style="text-align:right">90.46</td>
+<td style="text-align:right">87.48</td>
+<td style="text-align:right">88.98</td>
+</tr>
+<tr>
+<td style="text-align:left">naija-nsc-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.08</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.96</td>
+<td style="text-align:right">97.56</td>
+<td style="text-align:right">99.39</td>
+<td style="text-align:right">93.10</td>
+<td style="text-align:right">90.53</td>
+<td style="text-align:right">87.55</td>
+<td style="text-align:right">89.03</td>
+</tr>
+<tr>
+<td style="text-align:left">north_sami-giella-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.87</td>
+<td style="text-align:right">98.79</td>
+<td style="text-align:right">91.63</td>
+<td style="text-align:right">93.51</td>
+<td style="text-align:right">89.29</td>
+<td style="text-align:right">85.24</td>
+<td style="text-align:right">86.91</td>
+<td style="text-align:right">75.78</td>
+<td style="text-align:right">70.85</td>
+<td style="text-align:right">60.16</td>
+<td style="text-align:right">58.42</td>
+</tr>
+<tr>
+<td style="text-align:left">north_sami-giella-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.78</td>
+<td style="text-align:right">93.65</td>
+<td style="text-align:right">89.42</td>
+<td style="text-align:right">85.38</td>
+<td style="text-align:right">87.01</td>
+<td style="text-align:right">76.01</td>
+<td style="text-align:right">71.08</td>
+<td style="text-align:right">60.38</td>
+<td style="text-align:right">58.60</td>
+</tr>
+<tr>
+<td style="text-align:left">norwegian-bokmaal-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.82</td>
+<td style="text-align:right">97.27</td>
+<td style="text-align:right">98.38</td>
+<td style="text-align:right">98.94</td>
+<td style="text-align:right">97.47</td>
+<td style="text-align:right">96.81</td>
+<td style="text-align:right">98.58</td>
+<td style="text-align:right">93.88</td>
+<td style="text-align:right">92.64</td>
+<td style="text-align:right">86.95</td>
+<td style="text-align:right">88.78</td>
+</tr>
+<tr>
+<td style="text-align:left">norwegian-bokmaal-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.58</td>
+<td style="text-align:right">99.14</td>
+<td style="text-align:right">97.65</td>
+<td style="text-align:right">97.01</td>
+<td style="text-align:right">98.78</td>
+<td style="text-align:right">94.54</td>
+<td style="text-align:right">93.28</td>
+<td style="text-align:right">87.54</td>
+<td style="text-align:right">89.41</td>
+</tr>
+<tr>
+<td style="text-align:left">norwegian-nynorsk-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.93</td>
+<td style="text-align:right">94.54</td>
+<td style="text-align:right">98.43</td>
+<td style="text-align:right">99.16</td>
+<td style="text-align:right">97.35</td>
+<td style="text-align:right">96.55</td>
+<td style="text-align:right">98.46</td>
+<td style="text-align:right">93.79</td>
+<td style="text-align:right">92.37</td>
+<td style="text-align:right">85.84</td>
+<td style="text-align:right">88.08</td>
+</tr>
+<tr>
+<td style="text-align:left">norwegian-nynorsk-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.62</td>
+<td style="text-align:right">99.27</td>
+<td style="text-align:right">97.51</td>
+<td style="text-align:right">96.75</td>
+<td style="text-align:right">98.60</td>
+<td style="text-align:right">94.58</td>
+<td style="text-align:right">93.19</td>
+<td style="text-align:right">86.82</td>
+<td style="text-align:right">89.08</td>
+</tr>
+<tr>
+<td style="text-align:left">old_church_slavonic-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">40.05</td>
+<td style="text-align:right">96.11</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">89.72</td>
+<td style="text-align:right">88.01</td>
+<td style="text-align:right">90.18</td>
+<td style="text-align:right">78.06</td>
+<td style="text-align:right">73.64</td>
+<td style="text-align:right">60.96</td>
+<td style="text-align:right">61.97</td>
+</tr>
+<tr>
+<td style="text-align:left">old_church_slavonic-proiel-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.66</td>
+<td style="text-align:right">96.98</td>
+<td style="text-align:right">90.32</td>
+<td style="text-align:right">88.99</td>
+<td style="text-align:right">90.19</td>
+<td style="text-align:right">85.05</td>
+<td style="text-align:right">80.53</td>
+<td style="text-align:right">68.59</td>
+<td style="text-align:right">69.15</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-torot-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">34.53</td>
+<td style="text-align:right">95.40</td>
+<td style="text-align:right">95.48</td>
+<td style="text-align:right">89.92</td>
+<td style="text-align:right">87.64</td>
+<td style="text-align:right">88.09</td>
+<td style="text-align:right">76.94</td>
+<td style="text-align:right">72.12</td>
+<td style="text-align:right">58.23</td>
+<td style="text-align:right">57.89</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-torot-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.89</td>
+<td style="text-align:right">95.94</td>
+<td style="text-align:right">90.67</td>
+<td style="text-align:right">88.72</td>
+<td style="text-align:right">88.14</td>
+<td style="text-align:right">85.27</td>
+<td style="text-align:right">80.38</td>
+<td style="text-align:right">67.99</td>
+<td style="text-align:right">65.94</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-birchbark-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">16.66</td>
+<td style="text-align:right">88.50</td>
+<td style="text-align:right">99.37</td>
+<td style="text-align:right">76.09</td>
+<td style="text-align:right">72.03</td>
+<td style="text-align:right">65.58</td>
+<td style="text-align:right">64.39</td>
+<td style="text-align:right">57.66</td>
+<td style="text-align:right">32.84</td>
+<td style="text-align:right">27.49</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-birchbark-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">89.13</td>
+<td style="text-align:right">99.38</td>
+<td style="text-align:right">76.70</td>
+<td style="text-align:right">72.84</td>
+<td style="text-align:right">65.59</td>
+<td style="text-align:right">76.43</td>
+<td style="text-align:right">69.19</td>
+<td style="text-align:right">41.15</td>
+<td style="text-align:right">32.90</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-rnc-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.64</td>
+<td style="text-align:right">60.48</td>
+<td style="text-align:right">92.65</td>
+<td style="text-align:right">86.46</td>
+<td style="text-align:right">78.10</td>
+<td style="text-align:right">68.76</td>
+<td style="text-align:right">77.22</td>
+<td style="text-align:right">64.58</td>
+<td style="text-align:right">60.03</td>
+<td style="text-align:right">36.90</td>
+<td style="text-align:right">37.52</td>
+</tr>
+<tr>
+<td style="text-align:left">old_east_slavic-rnc-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.99</td>
+<td style="text-align:right">88.74</td>
+<td style="text-align:right">79.24</td>
+<td style="text-align:right">69.78</td>
+<td style="text-align:right">78.28</td>
+<td style="text-align:right">70.79</td>
+<td style="text-align:right">65.17</td>
+<td style="text-align:right">39.63</td>
+<td style="text-align:right">40.04</td>
+</tr>
+<tr>
+<td style="text-align:left">old_french-srcmf-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.70</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">96.74</td>
+<td style="text-align:right">96.58</td>
+<td style="text-align:right">97.76</td>
+<td style="text-align:right">95.78</td>
+<td style="text-align:right">99.66</td>
+<td style="text-align:right">90.92</td>
+<td style="text-align:right">87.17</td>
+<td style="text-align:right">80.65</td>
+<td style="text-align:right">84.10</td>
+</tr>
+<tr>
+<td style="text-align:left">old_french-srcmf-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.06</td>
+<td style="text-align:right">96.91</td>
+<td style="text-align:right">98.07</td>
+<td style="text-align:right">96.08</td>
+<td style="text-align:right">99.96</td>
+<td style="text-align:right">91.34</td>
+<td style="text-align:right">87.62</td>
+<td style="text-align:right">81.11</td>
+<td style="text-align:right">84.56</td>
+</tr>
+<tr>
+<td style="text-align:left">persian-perdt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.66</td>
+<td style="text-align:right">99.83</td>
+<td style="text-align:right">97.51</td>
+<td style="text-align:right">97.39</td>
+<td style="text-align:right">97.64</td>
+<td style="text-align:right">95.63</td>
+<td style="text-align:right">98.91</td>
+<td style="text-align:right">93.56</td>
+<td style="text-align:right">91.32</td>
+<td style="text-align:right">86.30</td>
+<td style="text-align:right">88.68</td>
+</tr>
+<tr>
+<td style="text-align:left">persian-perdt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.81</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">97.94</td>
+<td style="text-align:right">95.92</td>
+<td style="text-align:right">99.23</td>
+<td style="text-align:right">94.08</td>
+<td style="text-align:right">91.84</td>
+<td style="text-align:right">86.86</td>
+<td style="text-align:right">89.27</td>
+</tr>
+<tr>
+<td style="text-align:left">persian-seraji-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.65</td>
+<td style="text-align:right">98.75</td>
+<td style="text-align:right">97.89</td>
+<td style="text-align:right">97.91</td>
+<td style="text-align:right">97.90</td>
+<td style="text-align:right">97.44</td>
+<td style="text-align:right">98.26</td>
+<td style="text-align:right">91.78</td>
+<td style="text-align:right">88.92</td>
+<td style="text-align:right">84.47</td>
+<td style="text-align:right">84.56</td>
+</tr>
+<tr>
+<td style="text-align:left">persian-seraji-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.22</td>
+<td style="text-align:right">98.23</td>
+<td style="text-align:right">98.22</td>
+<td style="text-align:right">97.74</td>
+<td style="text-align:right">98.54</td>
+<td style="text-align:right">92.47</td>
+<td style="text-align:right">89.62</td>
+<td style="text-align:right">85.12</td>
+<td style="text-align:right">85.22</td>
+</tr>
+<tr>
+<td style="text-align:left">polish-pdb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.85</td>
+<td style="text-align:right">97.33</td>
+<td style="text-align:right">98.86</td>
+<td style="text-align:right">95.76</td>
+<td style="text-align:right">95.89</td>
+<td style="text-align:right">95.08</td>
+<td style="text-align:right">98.08</td>
+<td style="text-align:right">94.21</td>
+<td style="text-align:right">92.16</td>
+<td style="text-align:right">85.14</td>
+<td style="text-align:right">88.25</td>
+</tr>
+<tr>
+<td style="text-align:left">polish-pdb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.02</td>
+<td style="text-align:right">95.92</td>
+<td style="text-align:right">96.04</td>
+<td style="text-align:right">95.22</td>
+<td style="text-align:right">98.21</td>
+<td style="text-align:right">94.72</td>
+<td style="text-align:right">92.67</td>
+<td style="text-align:right">85.55</td>
+<td style="text-align:right">88.68</td>
+</tr>
+<tr>
+<td style="text-align:left">polish-lfg-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.85</td>
+<td style="text-align:right">99.65</td>
+<td style="text-align:right">98.97</td>
+<td style="text-align:right">96.08</td>
+<td style="text-align:right">96.49</td>
+<td style="text-align:right">95.15</td>
+<td style="text-align:right">98.24</td>
+<td style="text-align:right">96.78</td>
+<td style="text-align:right">95.40</td>
+<td style="text-align:right">89.61</td>
+<td style="text-align:right">92.26</td>
+</tr>
+<tr>
+<td style="text-align:left">polish-lfg-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.13</td>
+<td style="text-align:right">96.26</td>
+<td style="text-align:right">96.67</td>
+<td style="text-align:right">95.32</td>
+<td style="text-align:right">98.38</td>
+<td style="text-align:right">97.19</td>
+<td style="text-align:right">95.81</td>
+<td style="text-align:right">90.02</td>
+<td style="text-align:right">92.60</td>
+</tr>
+<tr>
+<td style="text-align:left">pomak-philotis-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.98</td>
+<td style="text-align:right">94.49</td>
+<td style="text-align:right">98.80</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.54</td>
+<td style="text-align:right">95.26</td>
+<td style="text-align:right">96.71</td>
+<td style="text-align:right">88.17</td>
+<td style="text-align:right">83.04</td>
+<td style="text-align:right">70.60</td>
+<td style="text-align:right">73.82</td>
+</tr>
+<tr>
+<td style="text-align:left">pomak-philotis-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.82</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.54</td>
+<td style="text-align:right">95.26</td>
+<td style="text-align:right">96.73</td>
+<td style="text-align:right">88.63</td>
+<td style="text-align:right">83.54</td>
+<td style="text-align:right">71.09</td>
+<td style="text-align:right">74.23</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-bosque-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.68</td>
+<td style="text-align:right">89.73</td>
+<td style="text-align:right">97.88</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.86</td>
+<td style="text-align:right">95.87</td>
+<td style="text-align:right">98.27</td>
+<td style="text-align:right">92.13</td>
+<td style="text-align:right">89.83</td>
+<td style="text-align:right">80.75</td>
+<td style="text-align:right">84.19</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-bosque-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.16</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.11</td>
+<td style="text-align:right">96.11</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">93.28</td>
+<td style="text-align:right">90.94</td>
+<td style="text-align:right">81.78</td>
+<td style="text-align:right">85.38</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-cintil-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.41</td>
+<td style="text-align:right">78.66</td>
+<td style="text-align:right">97.42</td>
+<td style="text-align:right">96.01</td>
+<td style="text-align:right">95.29</td>
+<td style="text-align:right">93.21</td>
+<td style="text-align:right">97.66</td>
+<td style="text-align:right">85.13</td>
+<td style="text-align:right">81.88</td>
+<td style="text-align:right">71.77</td>
+<td style="text-align:right">75.51</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-cintil-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.00</td>
+<td style="text-align:right">96.61</td>
+<td style="text-align:right">95.91</td>
+<td style="text-align:right">93.80</td>
+<td style="text-align:right">98.23</td>
+<td style="text-align:right">87.54</td>
+<td style="text-align:right">84.20</td>
+<td style="text-align:right">74.06</td>
+<td style="text-align:right">77.83</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-petrogold-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.59</td>
+<td style="text-align:right">93.11</td>
+<td style="text-align:right">98.75</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.70</td>
+<td style="text-align:right">98.20</td>
+<td style="text-align:right">99.09</td>
+<td style="text-align:right">94.69</td>
+<td style="text-align:right">93.57</td>
+<td style="text-align:right">88.77</td>
+<td style="text-align:right">90.11</td>
+</tr>
+<tr>
+<td style="text-align:left">portuguese-petrogold-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.05</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.00</td>
+<td style="text-align:right">98.46</td>
+<td style="text-align:right">99.51</td>
+<td style="text-align:right">95.62</td>
+<td style="text-align:right">94.42</td>
+<td style="text-align:right">89.68</td>
+<td style="text-align:right">91.18</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-rrt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.70</td>
+<td style="text-align:right">95.50</td>
+<td style="text-align:right">97.88</td>
+<td style="text-align:right">97.14</td>
+<td style="text-align:right">97.39</td>
+<td style="text-align:right">96.91</td>
+<td style="text-align:right">98.00</td>
+<td style="text-align:right">91.92</td>
+<td style="text-align:right">88.46</td>
+<td style="text-align:right">81.93</td>
+<td style="text-align:right">83.37</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-rrt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.15</td>
+<td style="text-align:right">97.40</td>
+<td style="text-align:right">97.65</td>
+<td style="text-align:right">97.16</td>
+<td style="text-align:right">98.25</td>
+<td style="text-align:right">92.77</td>
+<td style="text-align:right">89.25</td>
+<td style="text-align:right">82.56</td>
+<td style="text-align:right">83.97</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-nonstandard-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.83</td>
+<td style="text-align:right">96.77</td>
+<td style="text-align:right">96.12</td>
+<td style="text-align:right">91.86</td>
+<td style="text-align:right">90.52</td>
+<td style="text-align:right">89.16</td>
+<td style="text-align:right">94.82</td>
+<td style="text-align:right">88.67</td>
+<td style="text-align:right">84.67</td>
+<td style="text-align:right">68.20</td>
+<td style="text-align:right">76.17</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-nonstandard-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">92.87</td>
+<td style="text-align:right">91.51</td>
+<td style="text-align:right">90.13</td>
+<td style="text-align:right">95.88</td>
+<td style="text-align:right">90.46</td>
+<td style="text-align:right">86.41</td>
+<td style="text-align:right">69.79</td>
+<td style="text-align:right">77.51</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-simonero-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.84</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.41</td>
+<td style="text-align:right">97.97</td>
+<td style="text-align:right">97.51</td>
+<td style="text-align:right">97.20</td>
+<td style="text-align:right">98.89</td>
+<td style="text-align:right">93.95</td>
+<td style="text-align:right">92.03</td>
+<td style="text-align:right">85.30</td>
+<td style="text-align:right">88.19</td>
+</tr>
+<tr>
+<td style="text-align:left">romanian-simonero-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.56</td>
+<td style="text-align:right">98.12</td>
+<td style="text-align:right">97.66</td>
+<td style="text-align:right">97.34</td>
+<td style="text-align:right">99.04</td>
+<td style="text-align:right">94.29</td>
+<td style="text-align:right">92.35</td>
+<td style="text-align:right">85.57</td>
+<td style="text-align:right">88.47</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-syntagrus-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.67</td>
+<td style="text-align:right">98.31</td>
+<td style="text-align:right">98.50</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.02</td>
+<td style="text-align:right">93.76</td>
+<td style="text-align:right">98.19</td>
+<td style="text-align:right">93.80</td>
+<td style="text-align:right">91.66</td>
+<td style="text-align:right">82.80</td>
+<td style="text-align:right">88.87</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-syntagrus-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.83</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.33</td>
+<td style="text-align:right">94.07</td>
+<td style="text-align:right">98.48</td>
+<td style="text-align:right">94.51</td>
+<td style="text-align:right">92.33</td>
+<td style="text-align:right">83.33</td>
+<td style="text-align:right">89.40</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.50</td>
+<td style="text-align:right">96.49</td>
+<td style="text-align:right">98.05</td>
+<td style="text-align:right">97.56</td>
+<td style="text-align:right">94.57</td>
+<td style="text-align:right">93.51</td>
+<td style="text-align:right">96.87</td>
+<td style="text-align:right">91.64</td>
+<td style="text-align:right">88.70</td>
+<td style="text-align:right">80.95</td>
+<td style="text-align:right">84.53</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.50</td>
+<td style="text-align:right">97.97</td>
+<td style="text-align:right">95.01</td>
+<td style="text-align:right">93.90</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">92.83</td>
+<td style="text-align:right">89.81</td>
+<td style="text-align:right">81.85</td>
+<td style="text-align:right">85.46</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-taiga-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.07</td>
+<td style="text-align:right">86.01</td>
+<td style="text-align:right">95.59</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.02</td>
+<td style="text-align:right">92.05</td>
+<td style="text-align:right">94.62</td>
+<td style="text-align:right">82.89</td>
+<td style="text-align:right">79.47</td>
+<td style="text-align:right">70.47</td>
+<td style="text-align:right">73.61</td>
+</tr>
+<tr>
+<td style="text-align:left">russian-taiga-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.25</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.80</td>
+<td style="text-align:right">93.67</td>
+<td style="text-align:right">96.34</td>
+<td style="text-align:right">85.53</td>
+<td style="text-align:right">81.91</td>
+<td style="text-align:right">72.70</td>
+<td style="text-align:right">76.02</td>
+</tr>
+<tr>
+<td style="text-align:left">sanskrit-vedic-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">27.18</td>
+<td style="text-align:right">89.20</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">81.19</td>
+<td style="text-align:right">76.40</td>
+<td style="text-align:right">87.11</td>
+<td style="text-align:right">61.05</td>
+<td style="text-align:right">50.02</td>
+<td style="text-align:right">41.42</td>
+<td style="text-align:right">44.77</td>
+</tr>
+<tr>
+<td style="text-align:left">sanskrit-vedic-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">90.07</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">82.70</td>
+<td style="text-align:right">78.17</td>
+<td style="text-align:right">87.40</td>
+<td style="text-align:right">73.69</td>
+<td style="text-align:right">61.55</td>
+<td style="text-align:right">51.56</td>
+<td style="text-align:right">54.91</td>
+</tr>
+<tr>
+<td style="text-align:left">scottish_gaelic-arcosg-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.43</td>
+<td style="text-align:right">61.26</td>
+<td style="text-align:right">93.66</td>
+<td style="text-align:right">89.50</td>
+<td style="text-align:right">91.07</td>
+<td style="text-align:right">88.34</td>
+<td style="text-align:right">94.92</td>
+<td style="text-align:right">80.79</td>
+<td style="text-align:right">76.33</td>
+<td style="text-align:right">64.78</td>
+<td style="text-align:right">69.63</td>
+</tr>
+<tr>
+<td style="text-align:left">scottish_gaelic-arcosg-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.40</td>
+<td style="text-align:right">92.49</td>
+<td style="text-align:right">94.04</td>
+<td style="text-align:right">91.41</td>
+<td style="text-align:right">97.47</td>
+<td style="text-align:right">87.25</td>
+<td style="text-align:right">82.84</td>
+<td style="text-align:right">71.75</td>
+<td style="text-align:right">76.18</td>
+</tr>
+<tr>
+<td style="text-align:left">serbian-set-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.99</td>
+<td style="text-align:right">93.00</td>
+<td style="text-align:right">99.03</td>
+<td style="text-align:right">95.94</td>
+<td style="text-align:right">96.13</td>
+<td style="text-align:right">95.71</td>
+<td style="text-align:right">97.82</td>
+<td style="text-align:right">93.48</td>
+<td style="text-align:right">90.99</td>
+<td style="text-align:right">83.45</td>
+<td style="text-align:right">86.89</td>
+</tr>
+<tr>
+<td style="text-align:left">serbian-set-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.05</td>
+<td style="text-align:right">95.95</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">95.74</td>
+<td style="text-align:right">97.83</td>
+<td style="text-align:right">94.18</td>
+<td style="text-align:right">91.65</td>
+<td style="text-align:right">84.17</td>
+<td style="text-align:right">87.56</td>
+</tr>
+<tr>
+<td style="text-align:left">slovak-snk-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">81.69</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">90.26</td>
+<td style="text-align:right">93.35</td>
+<td style="text-align:right">89.42</td>
+<td style="text-align:right">96.51</td>
+<td style="text-align:right">91.48</td>
+<td style="text-align:right">89.73</td>
+<td style="text-align:right">80.19</td>
+<td style="text-align:right">84.62</td>
+</tr>
+<tr>
+<td style="text-align:left">slovak-snk-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.83</td>
+<td style="text-align:right">90.34</td>
+<td style="text-align:right">93.44</td>
+<td style="text-align:right">89.56</td>
+<td style="text-align:right">96.54</td>
+<td style="text-align:right">93.88</td>
+<td style="text-align:right">92.00</td>
+<td style="text-align:right">82.42</td>
+<td style="text-align:right">86.89</td>
+</tr>
+<tr>
+<td style="text-align:left">slovenian-ssj-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.94</td>
+<td style="text-align:right">98.95</td>
+<td style="text-align:right">98.96</td>
+<td style="text-align:right">97.09</td>
+<td style="text-align:right">97.26</td>
+<td style="text-align:right">96.78</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">94.23</td>
+<td style="text-align:right">92.86</td>
+<td style="text-align:right">87.37</td>
+<td style="text-align:right">89.22</td>
+</tr>
+<tr>
+<td style="text-align:left">slovenian-ssj-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.02</td>
+<td style="text-align:right">97.15</td>
+<td style="text-align:right">97.33</td>
+<td style="text-align:right">96.84</td>
+<td style="text-align:right">98.61</td>
+<td style="text-align:right">94.40</td>
+<td style="text-align:right">93.02</td>
+<td style="text-align:right">87.52</td>
+<td style="text-align:right">89.34</td>
+</tr>
+<tr>
+<td style="text-align:left">slovenian-sst-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.97</td>
+<td style="text-align:right">24.74</td>
+<td style="text-align:right">95.82</td>
+<td style="text-align:right">93.37</td>
+<td style="text-align:right">93.58</td>
+<td style="text-align:right">91.64</td>
+<td style="text-align:right">97.69</td>
+<td style="text-align:right">66.76</td>
+<td style="text-align:right">61.98</td>
+<td style="text-align:right">52.04</td>
+<td style="text-align:right">55.84</td>
+</tr>
+<tr>
+<td style="text-align:left">slovenian-sst-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.10</td>
+<td style="text-align:right">93.49</td>
+<td style="text-align:right">93.79</td>
+<td style="text-align:right">91.91</td>
+<td style="text-align:right">97.73</td>
+<td style="text-align:right">78.52</td>
+<td style="text-align:right">73.20</td>
+<td style="text-align:right">63.83</td>
+<td style="text-align:right">68.34</td>
+</tr>
+<tr>
+<td style="text-align:left">spanish-ancora-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.95</td>
+<td style="text-align:right">98.78</td>
+<td style="text-align:right">99.06</td>
+<td style="text-align:right">96.12</td>
+<td style="text-align:right">98.76</td>
+<td style="text-align:right">95.71</td>
+<td style="text-align:right">99.39</td>
+<td style="text-align:right">93.68</td>
+<td style="text-align:right">91.92</td>
+<td style="text-align:right">86.79</td>
+<td style="text-align:right">88.29</td>
+</tr>
+<tr>
+<td style="text-align:left">spanish-ancora-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.11</td>
+<td style="text-align:right">96.16</td>
+<td style="text-align:right">98.81</td>
+<td style="text-align:right">95.75</td>
+<td style="text-align:right">99.43</td>
+<td style="text-align:right">93.87</td>
+<td style="text-align:right">92.10</td>
+<td style="text-align:right">86.95</td>
+<td style="text-align:right">88.45</td>
+</tr>
+<tr>
+<td style="text-align:left">spanish-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.72</td>
+<td style="text-align:right">94.90</td>
+<td style="text-align:right">97.10</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.74</td>
+<td style="text-align:right">95.07</td>
+<td style="text-align:right">98.58</td>
+<td style="text-align:right">92.51</td>
+<td style="text-align:right">90.28</td>
+<td style="text-align:right">78.76</td>
+<td style="text-align:right">84.27</td>
+</tr>
+<tr>
+<td style="text-align:left">spanish-gsd-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.36</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.01</td>
+<td style="text-align:right">95.32</td>
+<td style="text-align:right">98.83</td>
+<td style="text-align:right">93.38</td>
+<td style="text-align:right">91.10</td>
+<td style="text-align:right">79.58</td>
+<td style="text-align:right">85.17</td>
+</tr>
+<tr>
+<td style="text-align:left">swedish-talbanken-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.84</td>
+<td style="text-align:right">96.53</td>
+<td style="text-align:right">98.37</td>
+<td style="text-align:right">97.23</td>
+<td style="text-align:right">97.31</td>
+<td style="text-align:right">96.43</td>
+<td style="text-align:right">98.17</td>
+<td style="text-align:right">92.08</td>
+<td style="text-align:right">89.72</td>
+<td style="text-align:right">83.69</td>
+<td style="text-align:right">85.90</td>
+</tr>
+<tr>
+<td style="text-align:left">swedish-talbanken-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.53</td>
+<td style="text-align:right">97.42</td>
+<td style="text-align:right">97.49</td>
+<td style="text-align:right">96.61</td>
+<td style="text-align:right">98.33</td>
+<td style="text-align:right">92.53</td>
+<td style="text-align:right">90.15</td>
+<td style="text-align:right">84.20</td>
+<td style="text-align:right">86.44</td>
+</tr>
+<tr>
+<td style="text-align:left">swedish-lines-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.96</td>
+<td style="text-align:right">88.00</td>
+<td style="text-align:right">97.61</td>
+<td style="text-align:right">95.49</td>
+<td style="text-align:right">90.93</td>
+<td style="text-align:right">88.18</td>
+<td style="text-align:right">97.82</td>
+<td style="text-align:right">90.48</td>
+<td style="text-align:right">87.14</td>
+<td style="text-align:right">71.66</td>
+<td style="text-align:right">81.94</td>
+</tr>
+<tr>
+<td style="text-align:left">swedish-lines-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">97.71</td>
+<td style="text-align:right">95.50</td>
+<td style="text-align:right">90.96</td>
+<td style="text-align:right">88.23</td>
+<td style="text-align:right">97.86</td>
+<td style="text-align:right">91.19</td>
+<td style="text-align:right">87.78</td>
+<td style="text-align:right">72.25</td>
+<td style="text-align:right">82.63</td>
+</tr>
+<tr>
+<td style="text-align:left">tamil-ttb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">94.26</td>
+<td style="text-align:right">97.52</td>
+<td style="text-align:right">84.29</td>
+<td style="text-align:right">82.92</td>
+<td style="text-align:right">84.09</td>
+<td style="text-align:right">77.76</td>
+<td style="text-align:right">88.79</td>
+<td style="text-align:right">70.63</td>
+<td style="text-align:right">61.98</td>
+<td style="text-align:right">50.53</td>
+<td style="text-align:right">54.69</td>
+</tr>
+<tr>
+<td style="text-align:left">tamil-ttb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">89.14</td>
+<td style="text-align:right">87.13</td>
+<td style="text-align:right">89.19</td>
+<td style="text-align:right">81.80</td>
+<td style="text-align:right">93.87</td>
+<td style="text-align:right">78.38</td>
+<td style="text-align:right">68.88</td>
+<td style="text-align:right">56.48</td>
+<td style="text-align:right">60.89</td>
+</tr>
+<tr>
+<td style="text-align:left">telugu-mtg-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.58</td>
+<td style="text-align:right">96.62</td>
+<td style="text-align:right">92.94</td>
+<td style="text-align:right">92.94</td>
+<td style="text-align:right">98.61</td>
+<td style="text-align:right">92.94</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">90.72</td>
+<td style="text-align:right">84.07</td>
+<td style="text-align:right">76.19</td>
+<td style="text-align:right">80.19</td>
+</tr>
+<tr>
+<td style="text-align:left">telugu-mtg-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.48</td>
+<td style="text-align:right">93.48</td>
+<td style="text-align:right">99.03</td>
+<td style="text-align:right">93.48</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.68</td>
+<td style="text-align:right">85.02</td>
+<td style="text-align:right">77.22</td>
+<td style="text-align:right">81.03</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-boun-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">96.57</td>
+<td style="text-align:right">86.25</td>
+<td style="text-align:right">90.03</td>
+<td style="text-align:right">86.05</td>
+<td style="text-align:right">81.12</td>
+<td style="text-align:right">71.69</td>
+<td style="text-align:right">90.47</td>
+<td style="text-align:right">73.32</td>
+<td style="text-align:right">67.11</td>
+<td style="text-align:right">49.09</td>
+<td style="text-align:right">60.77</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-boun-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.97</td>
+<td style="text-align:right">88.91</td>
+<td style="text-align:right">83.07</td>
+<td style="text-align:right">73.35</td>
+<td style="text-align:right">93.52</td>
+<td style="text-align:right">80.79</td>
+<td style="text-align:right">73.91</td>
+<td style="text-align:right">52.78</td>
+<td style="text-align:right">66.50</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-atis-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">80.20</td>
+<td style="text-align:right">99.02</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">98.40</td>
+<td style="text-align:right">99.11</td>
+<td style="text-align:right">89.03</td>
+<td style="text-align:right">87.24</td>
+<td style="text-align:right">84.91</td>
+<td style="text-align:right">85.71</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-atis-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">99.04</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.57</td>
+<td style="text-align:right">98.42</td>
+<td style="text-align:right">99.11</td>
+<td style="text-align:right">90.96</td>
+<td style="text-align:right">89.09</td>
+<td style="text-align:right">86.83</td>
+<td style="text-align:right">87.69</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-framenet-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">96.52</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.75</td>
+<td style="text-align:right">93.87</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">93.73</td>
+<td style="text-align:right">84.80</td>
+<td style="text-align:right">74.12</td>
+<td style="text-align:right">77.96</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-framenet-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.52</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.75</td>
+<td style="text-align:right">93.87</td>
+<td style="text-align:right">96.39</td>
+<td style="text-align:right">93.73</td>
+<td style="text-align:right">84.80</td>
+<td style="text-align:right">74.12</td>
+<td style="text-align:right">77.96</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-imst-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">97.94</td>
+<td style="text-align:right">97.70</td>
+<td style="text-align:right">93.70</td>
+<td style="text-align:right">93.46</td>
+<td style="text-align:right">90.63</td>
+<td style="text-align:right">88.13</td>
+<td style="text-align:right">94.46</td>
+<td style="text-align:right">75.22</td>
+<td style="text-align:right">66.28</td>
+<td style="text-align:right">55.69</td>
+<td style="text-align:right">60.80</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-imst-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.46</td>
+<td style="text-align:right">95.27</td>
+<td style="text-align:right">92.41</td>
+<td style="text-align:right">89.75</td>
+<td style="text-align:right">96.32</td>
+<td style="text-align:right">78.94</td>
+<td style="text-align:right">69.42</td>
+<td style="text-align:right">57.62</td>
+<td style="text-align:right">62.96</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-kenet-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.12</td>
+<td style="text-align:right">93.80</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.10</td>
+<td style="text-align:right">90.85</td>
+<td style="text-align:right">93.50</td>
+<td style="text-align:right">83.94</td>
+<td style="text-align:right">71.51</td>
+<td style="text-align:right">62.32</td>
+<td style="text-align:right">65.35</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-kenet-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">93.83</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.12</td>
+<td style="text-align:right">90.89</td>
+<td style="text-align:right">93.51</td>
+<td style="text-align:right">84.10</td>
+<td style="text-align:right">71.63</td>
+<td style="text-align:right">62.46</td>
+<td style="text-align:right">65.49</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-penn-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.34</td>
+<td style="text-align:right">80.59</td>
+<td style="text-align:right">95.50</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.48</td>
+<td style="text-align:right">93.29</td>
+<td style="text-align:right">94.14</td>
+<td style="text-align:right">84.40</td>
+<td style="text-align:right">71.73</td>
+<td style="text-align:right">62.08</td>
+<td style="text-align:right">64.36</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-penn-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.14</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.12</td>
+<td style="text-align:right">93.94</td>
+<td style="text-align:right">94.71</td>
+<td style="text-align:right">86.84</td>
+<td style="text-align:right">73.89</td>
+<td style="text-align:right">63.46</td>
+<td style="text-align:right">65.77</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-tourism-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.96</td>
+<td style="text-align:right">99.86</td>
+<td style="text-align:right">98.92</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.98</td>
+<td style="text-align:right">94.67</td>
+<td style="text-align:right">98.27</td>
+<td style="text-align:right">97.04</td>
+<td style="text-align:right">91.43</td>
+<td style="text-align:right">81.58</td>
+<td style="text-align:right">87.09</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish-tourism-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.96</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.02</td>
+<td style="text-align:right">94.72</td>
+<td style="text-align:right">98.31</td>
+<td style="text-align:right">97.10</td>
+<td style="text-align:right">91.50</td>
+<td style="text-align:right">81.66</td>
+<td style="text-align:right">87.18</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish_german-sagt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">98.91</td>
+<td style="text-align:right">99.44</td>
+<td style="text-align:right">90.21</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">80.24</td>
+<td style="text-align:right">75.45</td>
+<td style="text-align:right">90.80</td>
+<td style="text-align:right">71.42</td>
+<td style="text-align:right">61.22</td>
+<td style="text-align:right">41.16</td>
+<td style="text-align:right">50.92</td>
+</tr>
+<tr>
+<td style="text-align:left">turkish_german-sagt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">91.09</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">80.82</td>
+<td style="text-align:right">75.93</td>
+<td style="text-align:right">91.49</td>
+<td style="text-align:right">72.76</td>
+<td style="text-align:right">62.20</td>
+<td style="text-align:right">41.63</td>
+<td style="text-align:right">51.55</td>
+</tr>
+<tr>
+<td style="text-align:left">ukrainian-iu-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.81</td>
+<td style="text-align:right">96.23</td>
+<td style="text-align:right">97.84</td>
+<td style="text-align:right">94.28</td>
+<td style="text-align:right">94.25</td>
+<td style="text-align:right">93.16</td>
+<td style="text-align:right">97.47</td>
+<td style="text-align:right">90.37</td>
+<td style="text-align:right">87.94</td>
+<td style="text-align:right">78.30</td>
+<td style="text-align:right">82.74</td>
+</tr>
+<tr>
+<td style="text-align:left">ukrainian-iu-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">98.03</td>
+<td style="text-align:right">94.44</td>
+<td style="text-align:right">94.39</td>
+<td style="text-align:right">93.31</td>
+<td style="text-align:right">97.67</td>
+<td style="text-align:right">90.97</td>
+<td style="text-align:right">88.52</td>
+<td style="text-align:right">78.70</td>
+<td style="text-align:right">83.18</td>
+</tr>
+<tr>
+<td style="text-align:left">urdu-udtb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">100.00</td>
+<td style="text-align:right">98.31</td>
+<td style="text-align:right">94.09</td>
+<td style="text-align:right">92.20</td>
+<td style="text-align:right">82.76</td>
+<td style="text-align:right">78.43</td>
+<td style="text-align:right">97.41</td>
+<td style="text-align:right">88.02</td>
+<td style="text-align:right">82.68</td>
+<td style="text-align:right">57.25</td>
+<td style="text-align:right">74.71</td>
+</tr>
+<tr>
+<td style="text-align:left">urdu-udtb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">94.06</td>
+<td style="text-align:right">92.19</td>
+<td style="text-align:right">82.76</td>
+<td style="text-align:right">78.41</td>
+<td style="text-align:right">97.41</td>
+<td style="text-align:right">88.13</td>
+<td style="text-align:right">82.81</td>
+<td style="text-align:right">57.30</td>
+<td style="text-align:right">74.88</td>
+</tr>
+<tr>
+<td style="text-align:left">uyghur-udt-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.54</td>
+<td style="text-align:right">81.87</td>
+<td style="text-align:right">89.77</td>
+<td style="text-align:right">91.72</td>
+<td style="text-align:right">88.23</td>
+<td style="text-align:right">80.82</td>
+<td style="text-align:right">94.71</td>
+<td style="text-align:right">75.32</td>
+<td style="text-align:right">64.44</td>
+<td style="text-align:right">50.04</td>
+<td style="text-align:right">57.14</td>
+</tr>
+<tr>
+<td style="text-align:left">uyghur-udt-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">90.23</td>
+<td style="text-align:right">92.21</td>
+<td style="text-align:right">88.65</td>
+<td style="text-align:right">81.27</td>
+<td style="text-align:right">95.22</td>
+<td style="text-align:right">77.05</td>
+<td style="text-align:right">66.02</td>
+<td style="text-align:right">50.95</td>
+<td style="text-align:right">58.33</td>
+</tr>
+<tr>
+<td style="text-align:left">vietnamese-vtb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">86.06</td>
+<td style="text-align:right">93.73</td>
+<td style="text-align:right">78.61</td>
+<td style="text-align:right">77.61</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">77.50</td>
+<td style="text-align:right">85.76</td>
+<td style="text-align:right">56.86</td>
+<td style="text-align:right">50.02</td>
+<td style="text-align:right">41.40</td>
+<td style="text-align:right">45.54</td>
+</tr>
+<tr>
+<td style="text-align:left">vietnamese-vtb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">90.02</td>
+<td style="text-align:right">88.88</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">88.73</td>
+<td style="text-align:right">99.50</td>
+<td style="text-align:right">76.31</td>
+<td style="text-align:right">65.90</td>
+<td style="text-align:right">55.36</td>
+<td style="text-align:right">61.24</td>
+</tr>
+<tr>
+<td style="text-align:left">welsh-ccg-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.46</td>
+<td style="text-align:right">97.68</td>
+<td style="text-align:right">95.27</td>
+<td style="text-align:right">94.28</td>
+<td style="text-align:right">89.57</td>
+<td style="text-align:right">87.25</td>
+<td style="text-align:right">94.43</td>
+<td style="text-align:right">86.73</td>
+<td style="text-align:right">80.81</td>
+<td style="text-align:right">63.09</td>
+<td style="text-align:right">69.84</td>
+</tr>
+<tr>
+<td style="text-align:left">welsh-ccg-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.74</td>
+<td style="text-align:right">94.73</td>
+<td style="text-align:right">90.03</td>
+<td style="text-align:right">87.66</td>
+<td style="text-align:right">94.94</td>
+<td style="text-align:right">87.83</td>
+<td style="text-align:right">81.85</td>
+<td style="text-align:right">64.04</td>
+<td style="text-align:right">70.94</td>
+</tr>
+<tr>
+<td style="text-align:left">western_armenian-armtdp-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.89</td>
+<td style="text-align:right">98.68</td>
+<td style="text-align:right">96.67</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.31</td>
+<td style="text-align:right">91.63</td>
+<td style="text-align:right">97.14</td>
+<td style="text-align:right">89.26</td>
+<td style="text-align:right">84.68</td>
+<td style="text-align:right">69.80</td>
+<td style="text-align:right">76.24</td>
+</tr>
+<tr>
+<td style="text-align:left">western_armenian-armtdp-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">96.75</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">92.40</td>
+<td style="text-align:right">91.71</td>
+<td style="text-align:right">97.23</td>
+<td style="text-align:right">89.51</td>
+<td style="text-align:right">84.91</td>
+<td style="text-align:right">69.99</td>
+<td style="text-align:right">76.44</td>
+</tr>
+<tr>
+<td style="text-align:left">wolof-wtb-ud-2.12-230717</td>
+<td style="text-align:left">Raw text</td>
+<td style="text-align:right">99.23</td>
+<td style="text-align:right">91.95</td>
+<td style="text-align:right">94.16</td>
+<td style="text-align:right">94.17</td>
+<td style="text-align:right">93.56</td>
+<td style="text-align:right">91.48</td>
+<td style="text-align:right">95.18</td>
+<td style="text-align:right">83.75</td>
+<td style="text-align:right">78.61</td>
+<td style="text-align:right">66.55</td>
+<td style="text-align:right">69.91</td>
+</tr>
+<tr>
+<td style="text-align:left">wolof-wtb-ud-2.12-230717</td>
+<td style="text-align:left">Gold tokenization</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">95.11</td>
+<td style="text-align:right">95.08</td>
+<td style="text-align:right">94.34</td>
+<td style="text-align:right">92.33</td>
+<td style="text-align:right">95.88</td>
+<td style="text-align:right">85.90</td>
+<td style="text-align:right">80.57</td>
+<td style="text-align:right">68.67</td>
+<td style="text-align:right">71.71</td>
+</tr>
+</tbody>
+</table>
+  </body>
+</html>

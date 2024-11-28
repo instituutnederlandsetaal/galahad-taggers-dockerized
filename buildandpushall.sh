@@ -15,6 +15,7 @@ docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:$VERSION
 
 # UD-parsers
+docker push instituutnederlandsetaal/taggers-dockerized-udpipe:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-spacy:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION
 docker push instituutnederlandsetaal/taggers-dockerized-flair:$VERSION
