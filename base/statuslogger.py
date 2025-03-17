@@ -29,8 +29,8 @@ import pathlib
 import time
 import fcntl
 
-STATUS_FOLDER = "status"
-PROCESS_FOLDER = "process"
+# Local
+from shared import STATUS_FOLDER, PROCESS_FOLDER
 
 log_format = "%(levelname)s %(asctime)s - %(message)s"
 logging.basicConfig(stream=sys.stdout, format=log_format, level=logging.INFO)

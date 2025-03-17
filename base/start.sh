@@ -1,7 +1,4 @@
-#!/bin/bash
-
-# turn on bash's job control
-set -m
+#!/bin/sh
 
 # start the webservice
 python3 webservice.py &

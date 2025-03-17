@@ -3,25 +3,23 @@
 import os
 
 UPLOAD_FOLDER = "input"
+STATUS_FOLDER = "status"
+PROCESS_FOLDER = "process"
 OUTPUT_FOLDER = "output"
 ERROR_FOLDER = "error"
+
+for folder in [
+    UPLOAD_FOLDER,
+    STATUS_FOLDER,
+    PROCESS_FOLDER,
+    OUTPUT_FOLDER,
+    ERROR_FOLDER,
+]:
+    os.makedirs(folder, exist_ok=True)
 
 TEXT_EXTENSIONS = {"txt"}
 ALLOWED_EXTENSIONS = TEXT_EXTENSIONS
 
 
-def file_extension(filename):
+def file_extension(filename: str) -> str:
     return filename.rsplit(".", 1)[1].lower()
-
-
-# make sure the upload folder exists
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-# make sure the output folder exists
-if not os.path.exists(OUTPUT_FOLDER):
-    os.makedirs(OUTPUT_FOLDER)
-
-# make sure the error folder exists
-if not os.path.exists(ERROR_FOLDER):
-    os.makedirs(ERROR_FOLDER)

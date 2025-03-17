@@ -1,15 +1,10 @@
-FROM python:3.12.7-slim-bookworm
+FROM python:3.13.2-slim-bookworm
 
-# Install requirements
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt \
-	&& mkdir input status output process
+# Copy python source and requirements.
+COPY . ./
 
-# copy python source
-COPY --link . ./
-
-# Optionally set a callback server
-# ENV CALLBACK_SERVER=http://localhost:8010
+# No cache to reduce image size.
+RUN pip install --no-deps --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
 
