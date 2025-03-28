@@ -1,5 +1,10 @@
-# galahad-taggers-dockerized
-GaLAHaD Taggers Dockerized provides a unified interface for linguistic annotation taggers to be added to GaLAHaD or to be run on their own. Tagger are containerized and can be accessed with an API in order to tag documents. Documents are queued and sent to a callback server once tagged.
+# galahad-taggers
+*GaLAHaD Taggers* provides a unified interface for automatic linguistic enrichment, compatible with GaLAHaD or for stand-alone use.
+Taggers run in Docker containers and can be accessed via a REST API.
+There is support for CPU & GPU tagging as well as multi-threaded tagging.
+Documents are queued and sent to a (GaLAHaD-like) callback server once tagged, or stay at the tagger when in stand-alone mode
+
+This repository refers to tagger models that have already been trained and are ready to be used in production. To train models, see [galahad-train-battery](https://github.com/INL/galahad-train-battery).
 
 [![Development images to Docker](https://github.com/INL/galahad-taggers-dockerized/actions/workflows/dev-to-docker.yml/badge.svg)](https://github.com/INL/galahad-taggers-dockerized/actions/workflows/dev-to-docker.yml)
 [![Production images to Docker](https://github.com/INL/galahad-taggers-dockerized/actions/workflows/prod-to-docker.yml/badge.svg)](https://github.com/INL/galahad-taggers-dockerized/actions/workflows/prod-to-docker.yml)
@@ -7,14 +12,10 @@ GaLAHaD Taggers Dockerized provides a unified interface for linguistic annotatio
 ### GaLAHaD-related Repositories
 - [galahad](https://github.com/INL/galahad)
 - [galahad-train-battery](https://github.com/INL/galahad-train-battery)
-- [galahad-taggers-dockerized](https://github.com/INL/galahad-taggers-dockerized) [you are here]
+- [galahad-taggers](https://github.com/INL/galahad-taggers-dockerized) [you are here]
 - [galahad-corpus-data](https://github.com/INL/galahad-corpus-data/)
 - [int-pie](https://github.com/INL/int-pie)
-- [int-huggingface-tagger](https://github.com/INL/huggingface-tagger) [to be released]
-
-This deployment architecture is developed for the project [GaLAHaD](https://github.com/INL/Galahad), but can also be run in standalone mode.
-
-This repository refers to tagger models that have already been trained and are ready to be used in production. To train models, see [galahad-train-battery](https://github.com/INL/galahad-train-battery).
+- [int-huggingface-tagger](https://github.com/INL/huggingface-tagger)
 
 ## Quick start
 Clone this repository and its submodules.

@@ -1,2 +1,4 @@
-.env.dev
-webservice
+.env
+stand-alone/data
+venv
+__pycache__
