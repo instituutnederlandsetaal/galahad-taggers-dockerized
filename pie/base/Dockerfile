@@ -1,6 +1,10 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/taggers-dockerized-base:$VERSION
 
-COPY --link ./process.py ./requirements.txt  ./
+FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
+
+ARG CPU_GPU=cpu
+ENV CPU_GPU=${CPU_GPU}
+
+COPY --link ./process.py ./requirements/$CPU_GPU.txt  ./
 COPY --link ./pie/ ./pie/
-RUN pip install --no-deps --no-cache-dir -r requirements.txt
+RUN uv pip install --system --index-strategy=unsafe-best-match --no-deps --no-cache-dir -r $CPU_GPU.txt

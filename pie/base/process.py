@@ -1,6 +1,6 @@
 """
 Initialize the pie tagger from the python class directly, and use that object to tag.
-We use this method instead of calling 'pie tag' on the commandline, 
+We use this method instead of calling 'pie tag' on the commandline,
 because we want to avoid the overhead of reinitializing the tagger.
 """
 
@@ -29,9 +29,15 @@ def init() -> None:
     """
     We initialize the PIE tagger class directly.
     """
+    device = "cpu" if os.getenv("CPU_GPU") == "cpu" else "cuda"
     global tagger
     tagger = Tagger(
-        batch_size=50, lower=False, max_sent_len=35, vrt=False, tokenize=True
+        batch_size=50,
+        lower=False,
+        max_sent_len=35,
+        vrt=False,
+        tokenize=True,
+        device=device,
     )
     for model, tasks in [("model.tar", [])]:
         tagger.add_model(model, *tasks)
