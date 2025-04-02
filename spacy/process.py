@@ -39,7 +39,7 @@ def init() -> None:
     """
     start_time = time.time()
 
-    if os.getenv("USE_GPU"):
+    if os.getenv("CPU_GPU") == "gpu":
         spacy.require_gpu()
 
     global nlp

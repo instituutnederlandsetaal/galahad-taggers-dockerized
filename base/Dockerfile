@@ -1,4 +1,4 @@
-FROM python:3.13.2-slim-bookworm
+FROM python:3.12.9-slim-bookworm
 
 # Copy python source and requirements.
 COPY . ./

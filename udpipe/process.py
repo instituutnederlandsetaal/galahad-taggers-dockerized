@@ -35,8 +35,8 @@ def init() -> None:
         "port": "",
         "default_model": "nl_alpino",
         "models": [
-            "dutch-alpino-ud-2.12-230717:nl_alpino-ud-2.12-230717:nl:nld:dut",
-            "models/nl_all-ud-2.12-230717.model",
+            "dutch-alpino-ud-2.15-241121:nl_alpino-ud-2.15-241121:nl:nld:dut",
+            "models/nl_all-ud-2.15-241121.model",
             "nl_alpino",
             "https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_212_models",
         ],

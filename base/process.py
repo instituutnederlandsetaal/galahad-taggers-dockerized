@@ -1,5 +1,5 @@
 """
-Initialize the tagger if needed and process input files by calling the specific tagger implementation 
+Initialize the tagger if needed and process input files by calling the specific tagger implementation
 and ensuring the output is written to the expected file.
 """
 

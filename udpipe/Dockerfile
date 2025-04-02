@@ -1,5 +1,5 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/taggers-dockerized-base:$VERSION
+FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
 
 # Install requirements
 COPY requirements.txt ./

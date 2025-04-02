@@ -61,9 +61,8 @@ def process(in_file: str, out_file: str) -> None:
     """
     Process the file at path "in_file" and write the result to path "out_file".
     """
-    with open(out_file, "x", encoding="utf-8") as f_out:
+    with open(out_file, "w+", encoding="utf-8") as f_out:
         with open(in_file, "r", encoding="utf-8") as f_in:
-
             is_xml = is_file_xml(in_file)
             nlp = xml_nlp if is_xml else txt_nlp
             doc = parse_tei(in_file) if is_xml else f_in.read()

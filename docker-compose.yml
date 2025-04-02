@@ -1,234 +1,97 @@
+x-defaults: &defaults
+  restart: unless-stopped
+  environment:
+    - NUM_WORKERS=${NUM_WORKERS}
+    - CALLBACK_SERVER=${CALLBACK_SERVER}
+  deploy:
+    resources:
+      limits:
+        memory: 2G
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [ gpu ]
+
 services:
     # pie (ports: 810x)
-    pie-tdn-1400-1600:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-1400-1600:${VERSION}
-        build:
-            context: pie/TDN-1400-1600
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+    pie-tdn-1200-1600:
+        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-1200-1600:${VERSION}
         ports:
             - 8100:8080
+        <<: *defaults
 
     pie-tdn-1600-1900:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-1600-1900:${VERSION}
-        build:
-            context: pie/TDN-1600-1900
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-1600-1900:${VERSION}
         ports:
             - 8101:8080
+        <<: *defaults
 
     pie-tdn-all:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-all:${VERSION}
-        build:
-            context: pie/TDN-ALL
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-all:${VERSION}
         ports:
             - 8102:8080
-
-    pie-tdn-bab:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-bab:${VERSION}
-        build:
-            context: pie/TDN-BAB
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8103:8080
-
-    pie-tdn-clvn:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-clvn:${VERSION}
-        build:
-            context: pie/TDN-CLVN
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8104:8080
-
-    pie-tdn-cour:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:${VERSION}
-        build:
-            context: pie/TDN-COUR
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8105:8080
-
-    pie-tdn-dbnldq:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:${VERSION}
-        build:
-            context: pie/TDN-DBNLDQ
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8106:8080
+        <<: *defaults
 
     # huggingface (port: 811x)
     hug-tdn-1400-1600:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-1400-1600:${VERSION}
-        build:
-            context: huggingface/TDN-1400-1600
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1400-1600:${VERSION}
         ports:
             - 8110:8080
+        <<: *defaults
 
     hug-tdn-1600-1900:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-1600-1900:${VERSION}
-        build:
-            context: huggingface/TDN-1600-1900
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1600-1900:${VERSION}
         ports:
             - 8111:8080
+        <<: *defaults
 
     hug-tdn-all:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-all:${VERSION}
-        build:
-            context: huggingface/TDN-ALL
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all:${VERSION}
         ports:
             - 8112:8080
-
-    hug-tdn-bab:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-bab:${VERSION}
-        build:
-            context: huggingface/TDN-BAB
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8113:8080
-
-    hug-tdn-clvn:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-clvn:${VERSION}
-        build:
-            context: huggingface/TDN-CLVN
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8114:8080
-
-    hug-tdn-cour:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-cour:${VERSION}
-        build:
-            context: huggingface/TDN-COUR
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8115:8080
-
-    hug-tdn-dbnldq:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-dbnldq:${VERSION}
-        build:
-            context: huggingface/TDN-DBNLDQ
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8116:8080
+        <<: *defaults
 
     hug-tdn-all-enhanced:
-        image: instituutnederlandsetaal/taggers-dockerized-hug-tdn-all-enhanced:${VERSION}
-        build:
-            context: huggingface/TDN-ALL-ENHANCED
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all-enhanced:${VERSION}
         ports:
             - 8117:8080
+        <<: *defaults
 
     # ud-parsers (812X)
-    spacy-gpu:
-        image: instituutnederlandsetaal/taggers-dockerized-spacy:${VERSION}
-        restart: unless-stopped
-        environment:
-            - USE_GPU=1
-            - NUM_WORKERS=6
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
+    spacy:
+        image: instituutnederlandsetaal/galahad-taggers-spacy-${CPU_GPU}:${VERSION}
         ports:
-            - 8120:8080 # cpu & gpu share port: choose one
-        deploy:
-            resources:
-                limits:
-                    memory: 24G
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          count: all
-                          capabilities: [ gpu ]
-
-    spacy-cpu:
-        image: instituutnederlandsetaal/taggers-dockerized-spacy:${VERSION}
-        restart: unless-stopped
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        ports:
-            - 8120:8080 # cpu & gpu share port: choose one
+            - 8120:8080
+        <<: *defaults
 
     stanza-alpino-conll02:
-        image: instituutnederlandsetaal/taggers-dockerized-stanza:${VERSION}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-stanza:${VERSION}
         environment:
             - STANZA_MODEL=alpino
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
             - 8121:8080
+        <<: *defaults
 
     stanza-lassysmall-wikiner:
-        image: instituutnederlandsetaal/taggers-dockerized-stanza:${VERSION}
-        restart: unless-stopped
+        image: instituutnederlandsetaal/galahad-taggers-stanza:${VERSION}
         environment:
             - STANZA_MODEL=lassysmall
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
         ports:
             - 8122:8080
+        <<: *defaults
 
-    flair-cpu:
-        image: instituutnederlandsetaal/taggers-dockerized-flair:${VERSION}
-        restart: unless-stopped
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
+    flair:
+        image: instituutnederlandsetaal/galahad-taggers-flair-${CPU_GPU}:${VERSION}
         ports:
             - 8123:8080
-
-    flair-gpu:
-        image: instituutnederlandsetaal/taggers-dockerized-flair:${VERSION}
-        restart: unless-stopped
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        ports:
-            - 8123:8080
-        deploy:
-            resources:
-                limits:
-                    memory: 4G
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          count: all
-                          capabilities: [ gpu ]
+        <<: *defaults
 
     udpipe:
-        image: instituutnederlandsetaal/taggers-dockerized-udpipe:${VERSION}
-        restart: unless-stopped
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        image: instituutnederlandsetaal/galahad-taggers-udpipe:${VERSION}
         ports:
             - 8124:8080
+        <<: *defaults
 
 networks:
     default:

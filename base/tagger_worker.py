@@ -1,12 +1,12 @@
 """
 Acts as a daemon that checks on an interval if there are any pending tasks (i.e. documents) to be processed.
-It then processes them one by one (i.e. running the tagger process), keeps track of their statusses, 
+It then processes them one by one (i.e. running the tagger process), keeps track of their statusses,
 and sends the results to the callback server. The server then responds with KEEP or DELETE,
 which determines if the resulting tagged output file is kept or deleted.
 Input files are deleted automatically after processing, or moved to the error folder if processing fails.
 
 We use a multiprocessing pool to process files, because we want to kill the process if needed.
-Additonally the taggers need to be initialized only once (and in the same thread), 
+Additonally the taggers need to be initialized only once (and in the same thread),
 so that can be done at pool initialization.
 """
 

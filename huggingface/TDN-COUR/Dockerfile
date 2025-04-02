@@ -1,4 +1,4 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/taggers-dockerized-hug-base:$VERSION
+FROM instituutnederlandsetaal/galahad-taggers-hug-base:$VERSION
 
 COPY --link . ./

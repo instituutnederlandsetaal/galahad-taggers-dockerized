@@ -1,5 +1,5 @@
 """
-Initialize the tagger if needed and process input files by calling the specific tagger implementation 
+Initialize the tagger if needed and process input files by calling the specific tagger implementation
 and ensuring the output is written to the expected file.
 """
 
@@ -43,12 +43,16 @@ def process(in_file: str, out_file: str) -> None:
             sentences = splitter.split(doc)
             all_tagged = []
             for sentence in sentences:
-                tagger.predict(sentence, force_token_predictions=True, verbose=True)  # in-place tagging
+                tagger.predict(
+                    sentence, force_token_predictions=True, verbose=True
+                )  # in-place tagging
                 all_tagged.append(sentence)
 
             # Write to output
             f_out.write("token\tupos\tentity\n")
             for tagged_sentence in all_tagged:
                 for tok in tagged_sentence:
-                    f_out.write(f"{tok.form}\t{tok.get_label('upos').value}\t{tok.get_label('ner').value}\n")
+                    f_out.write(
+                        f"{tok.form}\t{tok.get_label('upos').value}\t{tok.get_label('ner').value}\n"
+                    )
                 f_out.write("\n")

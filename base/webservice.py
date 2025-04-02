@@ -5,7 +5,7 @@ The server can upload files, delete files, and get the status of files.
 File are processed automatically once uploaded, with the result being sent back to the callback server.
 Input files are deleted automatically after being processed.
 
-Deleting files also stops the tagger if that file was being processed. 
+Deleting files also stops the tagger if that file was being processed.
 (Thus, deleting all input files is equivalent to stopping the tagger.)
 """
 

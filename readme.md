@@ -59,7 +59,7 @@ These taggers can still be used without a GaLAHaD endpoint, in the form of a job
 ## Creating your own tagger
 To create your own tagger, use the base tagger as a starting point and overwrite `process.py`. I.e., start your Dockerfile with:
 ```
-FROM instituutnederlandsetaal/taggers-dockerized-base:$VERSION
+FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
 COPY --link process.py /
 ```
 And fill out the process() and (optionally) init() functions of [base/process.py](https://github.com/INL/galahad-taggers-dockerized/blob/release/base/process.py).

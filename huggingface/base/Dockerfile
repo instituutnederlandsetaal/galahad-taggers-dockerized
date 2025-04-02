@@ -1,5 +1,5 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/taggers-dockerized-base:$VERSION
+FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
 
 COPY requirements.sh requirements.txt nltk-download.py ./
 RUN ./requirements.sh && python3 nltk-download.py
