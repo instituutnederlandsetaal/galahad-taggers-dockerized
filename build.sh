@@ -16,7 +16,6 @@ docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutne
 # tdn-all
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-pie-tdn-all:cpu-$VERSION pie/TDN-ALL
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-pie-tdn-all:gpu-$VERSION pie/TDN-ALL
-exit 0
 # tdn-1200-1600
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-pie-tdn-1200-1600:cpu-$VERSION pie/TDN-1200-1600
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-pie-tdn-1200-1600:gpu-$VERSION pie/TDN-1200-1600
