@@ -1,7 +1,7 @@
 ARG VERSION=dev
 ARG CPU_GPU=cpu
 
-FROM instituutnederlandsetaal/galahad-taggers-base:$CPU_GPU-$VERSION
+FROM instituutnederlandsetaal/galahad-taggers:$CPU_GPU-$VERSION
 
 ARG SPACY_MODEL
 ENV SPACY_MODEL=$SPACY_MODEL
