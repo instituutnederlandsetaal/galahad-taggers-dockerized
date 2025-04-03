@@ -1,1 +1,140 @@
-{"datasets": [{"sourcePath": "source-data/dbnl-excerpts-15", "trainingPath": "training-data/dbnl-excerpts-15", "columns": ["token", "pos", "lemma", "group_id"], "name": "dbnl-excerpts-15", "eraFrom": "1400", "eraTo": "1500", "tagset": "TDN-Core", "dataset": true, "public": true, "sourceName": "dbnl-excerpts-15", "sourceURL": "https://dbnl.org", "version": "1.0", "description": "CLARIAH Evaluation Set 1400-1500"}, {"sourcePath": "source-data/dbnl-excerpts-16", "trainingPath": "training-data/dbnl-excerpts-16", "columns": ["token", "pos", "lemma", "group_id"], "name": "dbnl-excerpts-16", "eraFrom": "1500", "eraTo": "1600", "tagset": "TDN-Core", "dataset": true, "public": true, "sourceName": "dbnl-excerpts-16", "sourceURL": "https://dbnl.org", "version": "1.0", "description": "CLARIAH Evaluation Set 1500-1600"}, {"sourcePath": "source-data/dictionary-quotations-15", "trainingPath": "training-data/dictionary-quotations-15", "columns": ["token", "pos", "lemma", "group_id"], "name": "dictionary-quotations-15", "eraFrom": "1400", "eraTo": "1500", "tagset": "TDN-Core", "dataset": true, "public": true, "sourceName": "dictionary-quotations-15", "sourceURL": "https://gtb.ivdnt.org/", "version": "1.0", "description": "Historical Dictionary Quotations (MNW), 1400-1500"}, {"sourcePath": "source-data/dictionary-quotations-16", "trainingPath": "training-data/dictionary-quotations-16", "columns": ["token", "pos", "lemma", "group_id"], "name": "dictionary-quotations-16", "eraFrom": "1500", "eraTo": "1600", "tagset": "TDN-Core", "dataset": true, "public": true, "sourceName": "dictionary-quotations-16", "sourceURL": "https://gtb.ivdnt.org/", "version": "1.0", "description": "Historical Dictionary Quotations (WNT), 1500-1600"}, {"sourcePath": "source-data/clvn", "trainingPath": "training-data/clvn", "columns": ["token", "pos", "lemma", "group_id"], "name": "clvn", "eraFrom": "1500", "eraTo": "1600", "tagset": "TDN-Core", "dataset": true, "public": true, "sourceName": "clvn", "sourceURL": "https://ivdnt.org/actueel/nieuws/digitaaljaar-2024-databanken-van-nicoline/", "version": "1.0", "description": "CLVN (selection)"}]}
+{
+    "datasets": [
+        {
+            "path": "training-data/dbnl-excerpts-15",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "dbnl-excerpts-15",
+            "eraFrom": "1400",
+            "eraTo": "1500",
+            "tagset": "TDN-Core",
+            "sourceName": "dbnl-excerpts-15",
+            "sourceURL": "https://dbnl.org",
+            "version": "1.0.0",
+            "description": "CLARIAH Evaluation Set 1400-1500"
+        },
+        {
+            "path": "training-data/dbnl-excerpts-16",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "dbnl-excerpts-16",
+            "eraFrom": "1500",
+            "eraTo": "1600",
+            "tagset": "TDN-Core",
+            "sourceName": "dbnl-excerpts-16",
+            "sourceURL": "https://dbnl.org",
+            "version": "1.0.0",
+            "description": "CLARIAH Evaluation Set 1500-1600"
+        },
+        {
+            "path": "training-data/gysseling-ambtelijk",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "gysseling-ambtelijk",
+            "eraFrom": "1200",
+            "eraTo": "1300",
+            "tagset": "TDN-Core",
+            "sourceName": "gysseling-ambtelijk",
+            "sourceURL": "https://corpusgysseling.ivdnt.org/",
+            "version": "1.0.0",
+            "description": "Corpus Gysseling, legal/administrative documents (selection)"
+        },
+        {
+            "path": "training-data/gysseling-literair",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "gysseling-literair",
+            "eraFrom": "1200",
+            "eraTo": "1300",
+            "tagset": "TDN-Core",
+            "sourceName": "gysseling-literair",
+            "sourceURL": "https://corpusgysseling.ivdnt.org/",
+            "version": "1.0.0",
+            "description": "Corpus Gysseling, literary documents (selection)"
+        },
+        {
+            "path": "training-data/dictionary-quotations-14",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "dictionary-quotations-14",
+            "eraFrom": "1300",
+            "eraTo": "1400",
+            "tagset": "TDN-Core",
+            "sourceName": "dictionary-quotations-14",
+            "sourceURL": "https://gtb.ivdnt.org/",
+            "version": "1.0.0",
+            "description": "Historical Dictionary Quotations (MNW), 1300-1400"
+        },
+        {
+            "path": "training-data/dictionary-quotations-15",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "dictionary-quotations-15",
+            "eraFrom": "1400",
+            "eraTo": "1500",
+            "tagset": "TDN-Core",
+            "sourceName": "dictionary-quotations-15",
+            "sourceURL": "https://gtb.ivdnt.org/",
+            "version": "1.0.2",
+            "description": "Historical Dictionary Quotations (MNW), 1400-1500"
+        },
+        {
+            "path": "training-data/dictionary-quotations-16",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "dictionary-quotations-16",
+            "eraFrom": "1500",
+            "eraTo": "1600",
+            "tagset": "TDN-Core",
+            "sourceName": "dictionary-quotations-16",
+            "sourceURL": "https://gtb.ivdnt.org/",
+            "version": "1.0.2",
+            "description": "Historical Dictionary Quotations (WNT), 1500-1600"
+        },
+        {
+            "path": "training-data/clvn",
+            "columns": [
+                "token",
+                "pos",
+                "lemma",
+                "group_id"
+            ],
+            "name": "clvn",
+            "eraFrom": "1500",
+            "eraTo": "1600",
+            "tagset": "TDN-Core",
+            "sourceName": "clvn",
+            "sourceURL": "https://ivdnt.org/actueel/nieuws/digitaaljaar-2024-databanken-van-nicoline/",
+            "version": "1.0.1",
+            "description": "CLVN (selection)"
+        }
+    ]
+}

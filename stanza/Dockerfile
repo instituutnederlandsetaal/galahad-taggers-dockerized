@@ -1,8 +1,9 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
-
 ARG CPU_GPU=cpu
-ENV CPU_GPU=${CPU_GPU}
+
+FROM instituutnederlandsetaal/galahad-taggers-base:$CPU_GPU-$VERSION
+
+ENV CPU_GPU=$CPU_GPU
 
 COPY --link process.py conllu_tei_helper.py ./requirements/$CPU_GPU.txt ./
 RUN pip install --no-cache-dir -r $CPU_GPU.txt

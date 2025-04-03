@@ -1,6 +1,6 @@
 ARG VERSION=dev
-ARG CPU_GPU=${CPU_GPU}
+ARG CPU_GPU=cpu
 
-FROM instituutnederlandsetaal/galahad-taggers-pie-$CPU_GPU-base:$VERSION
+FROM instituutnederlandsetaal/galahad-taggers-pie:$CPU_GPU-$VERSION
 
 COPY --link *.tar ./model.tar

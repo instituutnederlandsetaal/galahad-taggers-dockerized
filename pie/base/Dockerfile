@@ -1,10 +1,9 @@
 ARG VERSION=dev
-
-FROM instituutnederlandsetaal/galahad-taggers-base:$VERSION
-
 ARG CPU_GPU=cpu
-ENV CPU_GPU=${CPU_GPU}
 
-COPY --link ./process.py ./requirements/$CPU_GPU.txt  ./
-COPY --link ./pie/ ./pie/
-RUN uv pip install --system --index-strategy=unsafe-best-match --no-deps --no-cache-dir -r $CPU_GPU.txt
+FROM instituutnederlandsetaal/galahad-taggers:$CPU_GPU-$VERSION
+
+ENV CPU_GPU=$CPU_GPU
+
+COPY --link .  ./
+RUN uv --no-cache pip install --system --index-strategy=unsafe-best-match --no-deps --no-cache-dir -r requirements.txt && uv cache clean

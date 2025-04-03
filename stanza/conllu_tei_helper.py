@@ -112,7 +112,6 @@ def conllu_to_tei(conllu_path, tei_path):
     word_id = 1
 
     for conllu_sentence in conllu_sentence_generator(conllu_path):
-
         paragraph = ET.SubElement(body, "p")
         tei_sentence = ET.SubElement(paragraph, "s")
         linkgroup = create_linkgroup(tei_sentence)

@@ -1,72 +1,77 @@
 x-defaults: &defaults
-  restart: unless-stopped
-  environment:
-    - NUM_WORKERS=${NUM_WORKERS}
-    - CALLBACK_SERVER=${CALLBACK_SERVER}
-  deploy:
-    resources:
-      limits:
-        memory: 2G
-      reservations:
-        devices:
-          - driver: nvidia
-            count: all
-            capabilities: [ gpu ]
+    restart: unless-stopped
+    environment:
+        - NUM_WORKERS=${NUM_WORKERS:=1}
+        - CALLBACK_SERVER=${CALLBACK_SERVER:=""}
+    deploy:
+        resources:
+            limits:
+                memory: 2G
+            # Comment out if no GPU is available.
+            reservations:
+                devices:
+                - driver: nvidia
+                  count: all
+                  capabilities: [ gpu ]
+
+networks:
+    default:
+        name: galahad-taggers
 
 services:
     # pie (ports: 810x)
     pie-tdn-1200-1600:
-        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-1200-1600:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-pie-tdn-1200-1600:$CPU_GPU-$VERSION
         ports:
             - 8100:8080
         <<: *defaults
 
     pie-tdn-1600-1900:
-        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-1600-1900:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-pie-tdn-1600-1900:$CPU_GPU-$VERSION
         ports:
             - 8101:8080
         <<: *defaults
 
     pie-tdn-all:
-        image: instituutnederlandsetaal/galahad-taggers-pie-${CPU_GPU}-tdn-all:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-pie-tdn-all:$CPU_GPU-$VERSION
         ports:
             - 8102:8080
         <<: *defaults
 
     # huggingface (port: 811x)
     hug-tdn-1400-1600:
-        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1400-1600:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1400-1600:$VERSION
         ports:
             - 8110:8080
         <<: *defaults
 
     hug-tdn-1600-1900:
-        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1600-1900:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-1600-1900:$VERSION
         ports:
             - 8111:8080
         <<: *defaults
 
     hug-tdn-all:
-        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all:$VERSION
         ports:
             - 8112:8080
         <<: *defaults
 
     hug-tdn-all-enhanced:
-        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all-enhanced:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-hug-tdn-all-enhanced:$VERSION
         ports:
             - 8117:8080
         <<: *defaults
 
     # ud-parsers (812X)
     spacy:
-        image: instituutnederlandsetaal/galahad-taggers-spacy-${CPU_GPU}:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-spacy:$CPU_GPU-$VERSION
         ports:
             - 8120:8080
         <<: *defaults
 
     stanza-alpino-conll02:
-        image: instituutnederlandsetaal/galahad-taggers-stanza:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
         environment:
             - STANZA_MODEL=alpino
         ports:
@@ -74,7 +79,7 @@ services:
         <<: *defaults
 
     stanza-lassysmall-wikiner:
-        image: instituutnederlandsetaal/galahad-taggers-stanza:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
         environment:
             - STANZA_MODEL=lassysmall
         ports:
@@ -82,18 +87,13 @@ services:
         <<: *defaults
 
     flair:
-        image: instituutnederlandsetaal/galahad-taggers-flair-${CPU_GPU}:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-flair:$CPU_GPU-$VERSION
         ports:
             - 8123:8080
         <<: *defaults
 
     udpipe:
-        image: instituutnederlandsetaal/galahad-taggers-udpipe:${VERSION}
+        image: instituutnederlandsetaal/galahad-taggers-udpipe:$CPU_GPU-$VERSION
         ports:
             - 8124:8080
         <<: *defaults
-
-networks:
-    default:
-        name: taggers-network
-        driver: bridge # external applications can attach to this network to access the taggers 
