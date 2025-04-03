@@ -28,8 +28,8 @@ docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutne
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-flair-cpu:$VERSION flair
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-flair-gpu:$VERSION flair
 # # spacy
-#docker build --build-arg VERSION=$VERSION --build-arg SPACY_MODEL=nl_core_news_lg --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-spacy-cpu:$VERSION spacy
-# docker build --build-arg VERSION=$VERSION --build-arg SPACY_MODEL=nl_core_news_lg --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-spacy-gpu:$VERSION spacy
+docker build --build-arg VERSION=$VERSION --build-arg SPACY_MODEL=nl_core_news_lg --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-spacy-cpu:$VERSION spacy
+docker build --build-arg VERSION=$VERSION --build-arg SPACY_MODEL=nl_core_news_lg --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-spacy-gpu:$VERSION spacy
 # stanza
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=cpu -t instituutnederlandsetaal/galahad-taggers-stanza-cpu:$VERSION stanza
 docker build --build-arg VERSION=$VERSION --build-arg CPU_GPU=gpu -t instituutnederlandsetaal/galahad-taggers-stanza-gpu:$VERSION stanza

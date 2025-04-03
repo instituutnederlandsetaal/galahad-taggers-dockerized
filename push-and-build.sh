@@ -15,7 +15,8 @@ docker push instituutnederlandsetaal/galahad-taggers-pie-gpu-tdn-all:$VERSION
 
 # UD-parsers
 # docker push instituutnederlandsetaal/galahad-taggers-udpipe:$VERSION
-# docker push instituutnederlandsetaal/galahad-taggers-spacy:$VERSION
+docker push instituutnederlandsetaal/galahad-taggers-spacy-cpu:$VERSION
+docker push instituutnederlandsetaal/galahad-taggers-spacy-gpu:$VERSION
 docker push instituutnederlandsetaal/galahad-taggers-stanza-cpu:$VERSION
 docker push instituutnederlandsetaal/galahad-taggers-stanza-gpu:$VERSION
 docker push instituutnederlandsetaal/galahad-taggers-flair-cpu:$VERSION
