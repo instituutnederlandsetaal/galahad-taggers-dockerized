@@ -1,8 +1,8 @@
 x-defaults: &defaults
     restart: unless-stopped
     environment:
-        - NUM_WORKERS=${NUM_WORKERS:=1}
-        - CALLBACK_SERVER=${CALLBACK_SERVER:=""}
+        - NUM_WORKERS=${NUM_WORKERS:-1}
+        - CALLBACK_SERVER=${CALLBACK_SERVER:-""}
     deploy:
         resources:
             limits:
