@@ -56,7 +56,7 @@ def process(in_file: str, out_file: str) -> None:
         shutil.copy(in_file, temp_in_file)
         # tag
         tagger.tag_file(
-            temp_in_file, use_beam=False, beam_width=10, keep_boundaries=False
+            temp_in_file, use_beam=False, beam_width=10, keep_boundaries=True
         )
         # output
         temp_result_file = os.path.join(temp_dir, "file-pie.txt")
