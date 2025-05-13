@@ -10,10 +10,11 @@ docker push instituutnederlandsetaal/taggers-dockerized-base:$VERSION_LABEL
 
 # PIE
 docker push instituutnederlandsetaal/taggers-dockerized-pie-base:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-1400-1600:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-1600-1900:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-all:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-bab:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-clvn:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:$VERSION_LABEL
+docker push instituutnederlandsetaal/taggers-dockerized-pie-bab:$VERSION_LABEL
+docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn:$VERSION_LABEL
+docker push instituutnederlandsetaal/taggers-dockerized-pie-crm:$VERSION_LABEL
+docker push instituutnederlandsetaal/taggers-dockerized-pie-gysseling:$VERSION_LABEL
+
+# Huggingface
+# docker push instituutnederlandsetaal/taggers-dockerized-huggingface-base:$VERSION_LABEL
+# docker push instituutnederlandsetaal/taggers-dockerized-huggingface-tdn:$VERSION_LABEL

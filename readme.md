@@ -1,18 +1,4 @@
-# galahad-taggers-dockerized (1.0.0)
-GaLAHaD Taggers Dockerized provides a unified interface for linguistic annotation taggers to be added to GaLAHaD or to be run on their own. Tagger are containerized and can be accessed with an API in order to tag documents. Documents are queued and sent to a callback server once tagged.
-
-[![Development images to Docker](https://github.com/INL/taggers-dockerized/actions/workflows/dev-to-docker.yml/badge.svg)](https://github.com/INL/taggers-dockerized/actions/workflows/dev-to-docker.yml)
-[![Production images to Docker](https://github.com/INL/taggers-dockerized/actions/workflows/prod-to-docker.yml/badge.svg)](https://github.com/INL/taggers-dockerized/actions/workflows/prod-to-docker.yml)
-
-### GaLAHaD-related Repositories
-- [galahad](https://github.com/INL/galahad)
-- [galahad-train-battery](https://github.com/INL/galahad-train-battery)
-- [galahad-taggers-dockerized](https://github.com/INL/galahad-taggers-dockerized) [you are here]
-- [galahad-corpus-data](https://github.com/INL/galahad-corpus-data/)
-- [int-pie](https://github.com/INL/int-pie)
-- [int-huggingface-tagger](https://github.com/INL/huggingface-tagger) [to be released]
-
-This deployment architecture is developed for the project [GaLAHaD](https://github.com/INL/Galahad), but can also be run in standalone mode.
+These taggers are split off of the Project https://github.com/INL/Galahad , but can also be run in standalone mode.
 
 This repository refers to tagger models that have already been trained and are ready to be used in production. To train models, see [galahad-train-battery](https://github.com/INL/galahad-train-battery).
 
@@ -28,13 +14,14 @@ Do you have docker and docker compose? Do you have access to the public Docker H
 docker compose up
 ```
 
-To run the taggers locally locally. The taggers are avaible on `localhost` with port equal to their devport. (You can find out the devport by looking at the port-forwards defined in `docker-compose.yml`)
+To run the taggers locally. The taggers are avaible on `localhost` with port equal to their devport. (You can find out the devport by looking at the port-forwards defined in `docker-compose.yml`)
 
 Alternatively you can start specific taggers with:
 
 ```
 docker compose up [SPECIFIC_TAGGER_1] [SPECIFIC_TAGGER_2]
 ```
+
 
 ### Local builds
 Build the docker images: see `buildall.sh`.
@@ -52,6 +39,13 @@ and use it instead of the default .env file like
 docker compose --env-file .env.dev
 ```
 
+### Running the spaCy tagger
+For instance: to run only the small Dutch spaCy tagger:
+```
+source dev.env
+docker compose --env-file dev.env up spacy-nl-sm
+```
+
 ## Creating your own tagger
 To create your own tagger, use the base tagger as a starting point and overwrite `process.py`. I.e., start your Dockerfile with:
 ```
@@ -63,7 +57,7 @@ The `in_file` points to a plain text file. Currently, your tagger is expected to
 
 ### Running your own tagger
 1. Define your tagger as a service in a docker compose file, say `your-tagger-dockerized.yml` . (You can use `docker-compose.yml` as guidance)
-2. Make sure the tagger is in the `taggers-network` network. `your-tagger-dockerized.yml` should specify it as an external network and add your tagger to it:
+2. Make sure the tagger is in the `taggers-dockerized_taggers-network` network. `your-tagger-dockerized.yml` should specify it as an external network and add your tagger to it:
    ```yaml
    services:
     my-tagger:
@@ -71,9 +65,9 @@ The `in_file` points to a plain text file. Currently, your tagger is expected to
      ports:
       - 8091:8080 # optional devport
      networks:
-      - taggers-network
+      - taggers-dockerized_taggers-network
    networks:
-    taggers-network:
+    taggers-dockerized_taggers-network:
      external: true
    ```
 3. Launch your tagger

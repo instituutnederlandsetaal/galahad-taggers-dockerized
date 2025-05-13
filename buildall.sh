@@ -8,10 +8,12 @@ docker build -t instituutnederlandsetaal/taggers-dockerized-base:$VERSION_LABEL 
 
 # PIE
 docker build -t instituutnederlandsetaal/taggers-dockerized-pie-base:$VERSION_LABEL pie/base
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-1400-1600:$VERSION_LABEL pie/TDN-1400-1600
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-1600-1900:$VERSION_LABEL pie/TDN-1600-1900
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-all:$VERSION_LABEL pie/TDN-ALL
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-bab:$VERSION_LABEL pie/TDN-BAB
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-clvn:$VERSION_LABEL pie/TDN-CLVN
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:$VERSION_LABEL pie/TDN-COUR
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:$VERSION_LABEL pie/TDN-DBNLDQ
+docker build -t instituutnederlandsetaal/taggers-dockerized-pie-bab:$VERSION_LABEL pie/bab
+docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn:$VERSION_LABEL pie/tdn
+docker build -t instituutnederlandsetaal/taggers-dockerized-pie-crm:$VERSION_LABEL pie/crm
+docker build -t instituutnederlandsetaal/taggers-dockerized-pie-gysseling:$VERSION_LABEL pie/gysseling
+
+# Huggingface 
+# Require local building
+# docker build -t instituutnederlandsetaal/taggers-dockerized-huggingface-base:$VERSION_LABEL huggingface/base
+# docker build -t instituutnederlandsetaal/taggers-dockerized-huggingface-tdn:$VERSION_LABEL huggingface/tdn

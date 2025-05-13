@@ -1,76 +1,107 @@
 services:
-    # pie (ports: 810x)
-    pie-tdn-1400-1600:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-1400-1600:dev
+    # spacy (ports: 812x)
+    spacy-nl-lg:
+        image: ccl-kuleuven/taggers-dockerized-spacy-nl-lg:1
         build:
-            context: pie/TDN-1400-1600
+            context: spacy/base
+        networks:
+            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
+            - SPACY_MODEL=nl_core_news_lg
         restart: unless-stopped
         ports:
-            - 8100:8080
+            - 8120:8080
 
-    pie-tdn-1600-1900:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-1600-1900:dev
+    spacy-en-lg:
+        image: ccl-kuleuven/taggers-dockerized-spacy-en-lg:1
         build:
-            context: pie/TDN-1600-1900
+            context: spacy/base
+        networks:
+            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
+            - SPACY_MODEL=en_core_web_lg
         restart: unless-stopped
         ports:
-            - 8101:8080
+            - 8121:8080
 
-    pie-tdn-all:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-all:dev
+    spacy-fr-lg:
+        image: ccl-kuleuven/taggers-dockerized-spacy-fr-lg:1
         build:
-            context: pie/TDN-ALL
+            context: spacy/base
+        networks:
+            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
+            - SPACY_MODEL=fr_core_news_lg
         restart: unless-stopped
         ports:
-            - 8102:8080
-    
-    pie-tdn-bab:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-bab:dev
-        build:
-            context: pie/TDN-BAB
-        environment:
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8103:8080
+            - 8122:8080
 
-    pie-tdn-clvn:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-clvn:dev
+    spacy-de-lg:
+        image: ccl-kuleuven/taggers-dockerized-spacy-de-lg:1
         build:
-            context: pie/TDN-CLVN
+            context: spacy/base
+        networks:
+            - taggers-network
         environment:
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+            - SPACY_MODEL=de_core_news_lg
+        restart: unless-stopped
+        ports:
+            - 8123:8080
+    # LeTs (ports: 813x)
+    lets-nl:
+        image: instituutnederlandsetaal/taggers-dockerized-lets-nl:dev
+        build:
+            context: lets/base
+        networks:
+            - taggers-network
+        environment:
+            - LETS_LANG=nl
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         restart: unless-stopped
         ports:
-            - 8104:8080
-
-    pie-tdn-cour:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-cour:dev
+            - 8130:8080
+    lets-fr:
+        image: instituutnederlandsetaal/taggers-dockerized-lets-fr:dev
         build:
-            context: pie/TDN-COUR
+            context: lets/base
+        networks:
+            - taggers-network
         environment:
+            - LETS_LANG=fr
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         restart: unless-stopped
         ports:
-            - 8105:8080
-
-    pie-tdn-dbnldq:
-        image: instituutnederlandsetaal/taggers-dockerized-pie-tdn-dbnldq:dev
+            - 8131:8080
+    lets-de:
+        image: instituutnederlandsetaal/taggers-dockerized-lets-de:dev
         build:
-            context: pie/TDN-DBNLDQ
+            context: lets/base
+        networks:
+            - taggers-network
         environment:
+            - LETS_LANG=de
             - CALLBACK_SERVER=${CALLBACK_SERVER}
         restart: unless-stopped
         ports:
-            - 8106:8080
+            - 8132:8080
+    lets-en:
+        image: instituutnederlandsetaal/taggers-dockerized-lets-en:dev
+        build:
+            context: lets/base
+        networks:
+            - taggers-network
+        environment:
+            - LETS_LANG=en
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        restart: unless-stopped
+        ports:
+            - 8133:8080
 
 networks:
-    default:
-        name: taggers-network
-        driver: bridge # external applications can attach to this network to access the taggers 
+    taggers-network:
+        # external applications can attach to this network to access the taggers 
+        driver: bridge
