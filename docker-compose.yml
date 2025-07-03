@@ -1,12 +1,12 @@
 x-defaults: &defaults
     restart: unless-stopped
-    environment:
-        - NUM_WORKERS=${NUM_WORKERS:-1}
-        - CALLBACK_SERVER=${CALLBACK_SERVER:-""}
+    environment: &environment
+        NUM_WORKERS: ${NUM_WORKERS:-1}
+        CALLBACK_SERVER: ${CALLBACK_SERVER:-""}
     deploy:
         resources:
             limits:
-                memory: 2G
+                memory: 4G
             # Comment out if no GPU is available.
             reservations:
                 devices:
@@ -71,20 +71,22 @@ services:
         <<: *defaults
 
     stanza-alpino-conll02:
+        <<: *defaults
         image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
         environment:
-            - STANZA_MODEL=alpino
+            <<: *environment
+            STANZA_MODEL: alpino
         ports:
             - 8121:8080
-        <<: *defaults
 
     stanza-lassysmall-wikiner:
+        <<: *defaults
         image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
         environment:
-            - STANZA_MODEL=lassysmall
+            <<: *environment
+            STANZA_MODEL: lassysmall
         ports:
             - 8122:8080
-        <<: *defaults
 
     flair:
         image: instituutnederlandsetaal/galahad-taggers-flair:$CPU_GPU-$VERSION
