@@ -65,10 +65,10 @@ services:
 
     # ud-parsers (812X)
     spacy:
+        <<: *defaults
         image: instituutnederlandsetaal/galahad-taggers-spacy:$CPU_GPU-$VERSION
         ports:
             - 8120:8080
-        <<: *defaults
 
     stanza-alpino-conll02:
         <<: *defaults
