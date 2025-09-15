@@ -61,6 +61,8 @@ def process(in_file: str, out_file: str) -> None:
     """
     Process the file at path "in_file" and write the result to path "out_file".
     """
+    if xml_nlp is None or txt_nlp is None:
+        init()
     with open(out_file, "w+", encoding="utf-8") as f_out:
         with open(in_file, "r", encoding="utf-8") as f_in:
             is_xml = is_file_xml(in_file)

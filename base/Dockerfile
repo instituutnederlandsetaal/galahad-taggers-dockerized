@@ -9,4 +9,4 @@ RUN pip install --no-deps --no-cache-dir uv && uv --no-cache pip install --syste
 
 EXPOSE 8080
 
-CMD ["./start.sh"]
+CMD ["python", "-u", "webservice.py"]

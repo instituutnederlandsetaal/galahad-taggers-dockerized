@@ -31,6 +31,8 @@ from process import PROCESSING_SPEED
 
 CALLBACK_SERVER: str = os.getenv("CALLBACK_SERVER") or ""
 NUM_WORKERS = int(os.getenv("NUM_WORKERS") or 1)
+# Needs to be defined as a reference object, e.g. dict.
+_global = {"pool": None}
 
 
 def run_pending_tasks() -> None:
@@ -38,10 +40,8 @@ def run_pending_tasks() -> None:
     Send a new task to the pool if there is no busy task.
     If there is no pool running, start a new pool.
     """
-    global pool
-
     # One task at a time.
-    tasks_in_queue = pool._taskqueue.qsize()
+    tasks_in_queue = _global["pool"]._taskqueue.qsize()
     if tasks_in_queue > 0:
         return
 
@@ -54,11 +54,11 @@ def run_pending_tasks() -> None:
             if sl.get_status()["busy"] is False:
                 sl.busy("Parsing file")  # Sets busy true
                 # Extra None check for typing
-                if (not is_pool_running(pool)) or pool is None:
+                if (not is_pool_running()) or _global["pool"] is None:
                     # Spawn pool if not running
-                    pool = mp.Pool(processes=NUM_WORKERS, initializer=process.init)
+                    _global["pool"] = mp.Pool(processes=NUM_WORKERS)
                 # Perform task at running pool
-                pool.apply_async(process_file, args=(sl.filename,))
+                _global["pool"].apply_async(process_file, args=(sl.filename,))
 
 
 def process_file(filename: str):
@@ -183,28 +183,31 @@ def send_error_to_callback_server(filename: str, out_path: str, message: str) ->
     keep_or_delete_file(r, out_path)
 
 
-def is_pool_running(pool: Optional[Pool]) -> bool:
+def is_pool_running() -> bool:
     """
     Check if the pool is running by trying to execute a dummy function.
     """
-    if pool is None:
+    if _global["pool"] is None:
         return False
     try:
-        pool.apply_async(lambda: None)
+        _global["pool"].apply_async(lambda: None)
     except ValueError as e:
         if str(e) == "Pool not running":
             return False
     return True
 
 
-# Pool needs to be defined after the functions it will execute.
-# https://stackoverflow.com/questions/41385708/multiprocessing-example-giving-attributeerror#comment101561695_42383397
-pool = None
+def terminate_pool() -> None:
+    """
+    Terminate the pool if it is running.
+    """
+    _global["pool"].terminate()
 
-if __name__ == "__main__":
+
+def run_background():
     # Can't use fork with the gpu.
     mp.set_start_method("spawn", force=True)
-    pool = mp.Pool(processes=NUM_WORKERS, initializer=process.init)
+    _global["pool"] = mp.Pool(processes=NUM_WORKERS)
 
     # It is ugly, but it is also used here:
     # https://pypi.org/project/schedule/

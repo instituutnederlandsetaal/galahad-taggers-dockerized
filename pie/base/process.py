@@ -50,6 +50,8 @@ def process(in_file: str, out_file: str) -> None:
     Pie outputs to the same directory as the input file.
     We process the file in a temporary directory so we don't polute /input.
     """
+    if tagger is None:
+        init()
     with tempfile.TemporaryDirectory() as temp_dir:
         # input
         temp_in_file = os.path.join(temp_dir, "file.txt")

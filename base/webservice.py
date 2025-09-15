@@ -13,6 +13,7 @@ Deleting files also stops the tagger if that file was being processed.
 import os
 import subprocess
 import uuid
+import threading
 
 # Third-party
 import bottle
@@ -23,6 +24,7 @@ from bottle import post, get, delete
 from shared import OUTPUT_FOLDER, UPLOAD_FOLDER, ERROR_FOLDER
 from statuslogger import StatusLogger
 from process import OUTPUT_EXTENSION, PROCESSING_SPEED
+from tagger_worker import run_background, terminate_pool
 
 app = application = bottle.default_app()
 
@@ -163,4 +165,15 @@ def delete_file(id: str):
         return HTTPResponse("File " + id + " deleted", 200)
 
 
-app.run(host="0.0.0.0", port=8080)
+@post("/terminate")
+def terminate():
+    """
+    Terminate the worker pool immediately, freeing RAM (& VRAM).
+    """
+    terminate_pool()
+    return HTTPResponse("Terminated the worker pool", 200)
+
+
+if __name__ == "__main__":
+    threading.Thread(target=run_background, daemon=True).start()
+    app.run(host="0.0.0.0", port=8080)
