@@ -1,4 +1,5 @@
 ARG VERSION=dev
-FROM instituutnederlandsetaal/galahad-taggers-hug-base:$VERSION
+ARG CPU_GPU=cpu
+FROM instituutnederlandsetaal/galahad-taggers-hug:$CPU_GPU-$VERSION
 
 COPY --link . ./

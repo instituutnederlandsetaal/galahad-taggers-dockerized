@@ -2,3 +2,5 @@
 stand-alone/data
 venv
 __pycache__
+huggingface/base/lexicon
+pytorch_model.bin

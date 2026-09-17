@@ -26,5 +26,7 @@ def init() -> None:
 
 
 def process(in_file: str, out_file: str) -> None:
+    if tagger is None:
+        init()
     # Huggingface outputs to out_file itself, so no copying/moving needed.
     tagger.process(in_file, out_file)
