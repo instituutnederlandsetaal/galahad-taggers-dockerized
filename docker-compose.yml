@@ -20,18 +20,6 @@ networks:
 
 services:
     # pie (ports: 810x)
-    pie-tdn-1200-1600:
-        image: instituutnederlandsetaal/galahad-taggers-pie-tdn-1200-1600:$CPU_GPU-$VERSION
-        ports:
-            - 8100:8080
-        <<: *defaults
-
-    pie-tdn-1600-1900:
-        image: instituutnederlandsetaal/galahad-taggers-pie-tdn-1600-1900:$CPU_GPU-$VERSION
-        ports:
-            - 8101:8080
-        <<: *defaults
-
     pie-tdn-all:
         image: instituutnederlandsetaal/galahad-taggers-pie-tdn-all:$CPU_GPU-$VERSION
         ports:
@@ -69,33 +57,3 @@ services:
         image: instituutnederlandsetaal/galahad-taggers-spacy:$CPU_GPU-$VERSION
         ports:
             - 8120:8080
-
-    stanza-alpino-conll02:
-        <<: *defaults
-        image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
-        environment:
-            <<: *environment
-            STANZA_MODEL: alpino
-        ports:
-            - 8121:8080
-
-    stanza-lassysmall-wikiner:
-        <<: *defaults
-        image: instituutnederlandsetaal/galahad-taggers-stanza:$CPU_GPU-$VERSION
-        environment:
-            <<: *environment
-            STANZA_MODEL: lassysmall
-        ports:
-            - 8122:8080
-
-    flair:
-        image: instituutnederlandsetaal/galahad-taggers-flair:$CPU_GPU-$VERSION
-        ports:
-            - 8123:8080
-        <<: *defaults
-
-    udpipe:
-        image: instituutnederlandsetaal/galahad-taggers-udpipe:$CPU_GPU-$VERSION
-        ports:
-            - 8124:8080
-        <<: *defaults
